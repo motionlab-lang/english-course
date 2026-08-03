@@ -1,7 +1,6 @@
 {
   "name": "English with Tanya",
   "short_name": "English Tanya",
-  "description": "Персональный 14-дневный курс английского",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#f5f3fb",
