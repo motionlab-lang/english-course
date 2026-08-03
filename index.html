@@ -39,6 +39,37 @@ button,input{font:inherit}.shell{max-width:1180px;margin:auto;min-height:100vh;p
 .mic-btn.listening{animation:pulse 1s infinite}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(34,38,47,.25)}70%{box-shadow:0 0 0 24px rgba(34,38,47,0)}100%{box-shadow:0 0 0 0 rgba(34,38,47,0)}}
 
+
+:root{
+ --accent-blue:#6f8cff;--accent-yellow:#ffd76f;--accent-coral:#ff8c7a;
+ --accent-green:#72d39b;--accent-purple:#a98cff;--accent-cyan:#65cfe8;
+}
+.color-art{
+ width:100%;height:100%;border-radius:28px;display:grid;place-items:center;
+ position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.8);
+ box-shadow:0 16px 30px rgba(44,52,72,.14);
+}
+.color-art:before,.color-art:after{
+ content:"";position:absolute;border-radius:50%;filter:blur(1px);opacity:.9
+}
+.color-art:before{width:82px;height:82px;left:-18px;top:-20px;background:rgba(255,255,255,.45)}
+.color-art:after{width:60px;height:60px;right:-14px;bottom:-18px;background:rgba(255,255,255,.36)}
+.color-art .symbol{font-size:64px;position:relative;z-index:2;filter:drop-shadow(0 6px 5px rgba(0,0,0,.12))}
+.color-art .mini-lines{position:absolute;left:16px;right:16px;bottom:13px;display:flex;gap:5px;z-index:2}
+.color-art .mini-lines i{height:5px;flex:1;border-radius:99px;background:rgba(255,255,255,.7)}
+.color-blue{background:linear-gradient(145deg,#89a4ff,#5e76dc)}
+.color-yellow{background:linear-gradient(145deg,#ffe9a9,#f1bd45)}
+.color-coral{background:linear-gradient(145deg,#ffac9e,#ed715e)}
+.color-green{background:linear-gradient(145deg,#9be9ba,#4eb77a)}
+.color-purple{background:linear-gradient(145deg,#c4adff,#8a6ee2)}
+.color-cyan{background:linear-gradient(145deg,#91e4f3,#43b8d3)}
+.color-pink{background:linear-gradient(145deg,#ffb5da,#e977ad)}
+.unknown-card{border-left:5px solid var(--accent-coral)}
+.unknown-count{margin-left:auto;background:#fff0ed;color:#a94736;padding:6px 9px;border-radius:99px;font-size:12px;font-weight:900}
+.resume-banner{display:none;margin-top:14px;padding:16px;background:linear-gradient(135deg,#fff7d6,#ffeaa2);border:1px solid #f1d778;border-radius:18px}
+.resume-banner.show{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.saved-answer-note{font-size:12px;color:var(--muted);text-align:center;margin-top:8px}
+
 </style></head><body>
 <div class="shell"><div class="app">
 <aside class="sidebar"><div class="brand"><div class="brandmark">EN</div><div>English<br>with Tanya</div></div>
@@ -46,7 +77,7 @@ button,input{font:inherit}.shell{max-width:1180px;margin:auto;min-height:100vh;p
 <button class="navbtn active" data-view="today"><span class="navicon">⌂</span>Сегодня</button>
 <button class="navbtn" data-view="course"><span class="navicon">▦</span>Курс</button>
 <button class="navbtn" data-view="dictionary"><span class="navicon">▤</span>Словарь</button>
-<button class="navbtn" data-view="review"><span class="navicon">↻</span>Повторение <span id="reviewBadge"></span></button>
+<button class="navbtn" data-view="review"><span class="navicon">↻</span>Не знаю <span id="reviewBadge"></span></button>
 <button class="navbtn" data-view="favorites"><span class="navicon">☆</span>Мои слова</button>
 <button class="navbtn" data-view="stats"><span class="navicon">▥</span>Статистика</button>
 <button class="navbtn" data-view="achievements"><span class="navicon">♕</span>Достижения</button>
@@ -56,6 +87,7 @@ button,input{font:inherit}.shell{max-width:1180px;margin:auto;min-height:100vh;p
 <main class="main">
 <section class="view active" id="today">
 <div class="toprow"><div class="title"><h1 id="todayTitle">День 1</h1><p>Изучай, практикуй, говори!</p></div><div class="panel progress-mini"><div class="progress-head"><span>Прогресс курса</span><span id="progressPct">0%</span></div><div class="track"><div class="bar" id="progressBar"></div></div><p style="color:var(--muted);margin:8px 0 0;font-size:13px" id="progressSub">День 1 из 14</p></div></div>
+<div class="resume-banner" id="resumeBanner"><div><b>У тебя есть незавершённый урок</b><div style="color:#76692e;font-size:13px" id="resumeText"></div></div><button class="btn dark" onclick="resumeLesson()">Продолжить</button></div>
 <div class="panel dashboard"><h2>Сегодня в уроке</h2><div class="lesson-summary">
 <div class="summary-item"><div>Новые слова</div><b>4 слова</b><div class="sticker"><svg viewBox="0 0 120 120" aria-hidden="true">
     <path d="M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z" fill="#fff" stroke="#22262f" stroke-width="3"/>
@@ -75,13 +107,13 @@ button,input{font:inherit}.shell{max-width:1180px;margin:auto;min-height:100vh;p
 </section>
 <section class="view" id="course"><div class="toprow"><div class="title"><h1>Курс</h1><p>14 дней, 56 слов и 5 разговорных практик.</p></div></div><div class="course-grid" id="courseGrid"></div></section>
 <section class="view" id="dictionary"><div class="toprow"><div class="title"><h1>Словарь</h1><p>Все слова курса в одном месте.</p></div></div><div class="panel dictionary"><input class="search" id="search" placeholder="Найти слово..."><div class="wordgrid" id="dictionaryGrid"></div></div></section>
-<section class="view" id="review"><div class="toprow"><div class="title"><h1>Повторение</h1><p>Слова, которые ты отметила «Не знаю».</p></div></div><div class="panel dictionary"><div class="wordgrid" id="reviewGrid"></div></div></section>
+<section class="view" id="review"><div class="toprow"><div class="title"><h1>Не знаю</h1><p>Здесь хранятся слова, которые ты сама отметила «Не знаю».</p></div></div><div class="panel dictionary"><div class="wordgrid" id="reviewGrid"></div></div></section>
 <section class="view" id="favorites"><div class="toprow"><div class="title"><h1>Мои слова</h1><p>Избранные слова, которые хочется сохранить.</p></div></div><div class="panel dictionary"><div class="wordgrid" id="favoriteGrid"></div></div></section>
 <section class="view" id="stats"><div class="toprow"><div class="title"><h1>Статистика</h1><p>Твой прогресс без лишней математики.</p></div></div><div class="stats-grid"><div class="panel stat"><strong id="statDays">0</strong>дней пройдено</div><div class="panel stat"><strong id="statWords">0</strong>слов изучено</div><div class="panel stat"><strong id="statReview">0</strong>на повторении</div></div></section>
 <section class="view" id="achievements"><div class="toprow"><div class="title"><h1>Достижения</h1><p>Небольшие цели, которые приятно закрывать.</p></div></div><div class="course-grid" id="achievementsGrid"></div></section>
 </main></div></div>
 
-<nav class="mobile-nav"><button class="active" data-view="today">⌂<br>Сегодня</button><button data-view="course">▦<br>Курс</button><button data-view="dictionary">▤<br>Словарь</button><button data-view="review">↻<br>Повторение</button><button data-view="favorites">☆<br>Мои слова</button></nav>
+<nav class="mobile-nav"><button class="active" data-view="today">⌂<br>Сегодня</button><button data-view="course">▦<br>Курс</button><button data-view="dictionary">▤<br>Словарь</button><button data-view="review">?<br>Не знаю</button><button data-view="favorites">☆<br>Мои слова</button></nav>
 
 <div class="lesson-overlay" id="lessonOverlay"><div class="lesson-wrap">
 <div class="lesson-head"><button class="back" onclick="closeLesson()">←</button><div class="steps" id="stepBars"></div><span id="stepLabel">1 из 6</span></div>
@@ -101,32 +133,72 @@ function currentIncomplete(){return Math.min((DAYS.findIndex((_,i)=>localStorage
 function openView(v){$$('.view').forEach(x=>x.classList.remove('active'));$$('[data-view]').forEach(x=>x.classList.toggle('active',x.dataset.view===v));$('#'+v).classList.add('active');}
 $$('[data-view]').forEach(b=>b.onclick=()=>openView(b.dataset.view));
 function renderToday(){currentDay=currentIncomplete();const d=DAYS[currentDay-1];$('#todayTitle').textContent='День '+currentDay;$('#progressSub').textContent='День '+currentDay+' из 14';$('#todayWords').innerHTML=d.words.map(w=>`<span class="chip">${w.en}</span>`).join('');$('#gptBtn').disabled=!d.gpt;$('#gptBtn').textContent=d.gpt?'Начать разговор':'Сегодня без практики';updateStats()}
-function updateStats(){const done=doneDays(),pct=Math.round(done/14*100),rev=getArr('review'),fav=getArr('favorites');$('#progressPct').textContent=pct+'%';$('#progressBar').style.width=pct+'%';$('#statDays').textContent=done;$('#statWords').textContent=done*4;$('#statReview').textContent=rev.length;$('#reviewBadge').textContent=rev.length?rev.length:'';$('#streakCount').textContent=Math.max(1,done)+' '+(done===1?'день':'дней');renderCourse();renderReview();renderFavorites();renderAchievements()}
+function updateStats(){const done=doneDays(),pct=Math.round(done/14*100),rev=getUnknown(),fav=getArr('favorites');$('#progressPct').textContent=pct+'%';$('#progressBar').style.width=pct+'%';$('#statDays').textContent=done;$('#statWords').textContent=done*4;$('#statReview').textContent=rev.length;$('#reviewBadge').textContent=rev.length?rev.length:'';$('#streakCount').textContent=Math.max(1,done)+' '+(done===1?'день':'дней');renderCourse();renderReview();renderFavorites();renderAchievements()}
 function renderCourse(){$('#courseGrid').innerHTML=DAYS.map((d,i)=>`<div class="panel course-card ${localStorage.getItem(key('done-'+(i+1)))==='1'?'done':''}" onclick="openDay(${i+1})"><span class="tag">День ${i+1}</span><h3>${d.title}</h3><p style="color:var(--muted)">4 слова · разные задания · GPT${d.gpt?' · GPT':''}</p></div>`).join('')}
 function renderDictionary(q=''){const list=allWords.filter(w=>(w.en+' '+w.ru).toLowerCase().includes(q.toLowerCase()));$('#dictionaryGrid').innerHTML=list.map(wordRow).join('')}
-function wordRow(w){const fav=getArr('favorites').some(x=>x.en===w.en);return `<div class="wordrow"><div class="mini">${STICKERS[w.icon]}</div><div><b>${w.en}</b><div style="color:var(--muted)">${w.ru}</div></div><button class="heart" onclick='toggleFavorite(${JSON.stringify(w)})'>${fav?'★':'☆'}</button></div>`}
+function wordRow(w){const fav=getArr('favorites').some(x=>x.en===w.en);return `<div class="wordrow"><div class="mini">${artFor(w)}</div><div><b>${w.en}</b><div style="color:var(--muted)">${w.ru}</div></div><button class="heart" onclick='toggleFavorite(${JSON.stringify(w)})'>${fav?'★':'☆'}</button></div>`}
 $('#search').oninput=e=>renderDictionary(e.target.value);
 function toggleFavorite(w){let a=getArr('favorites');a=a.some(x=>x.en===w.en)?a.filter(x=>x.en!==w.en):[...a,w];setArr('favorites',a);renderDictionary($('#search').value);renderFavorites()}
-function renderReview(){const a=getArr('review');$('#reviewGrid').innerHTML=a.length?a.map(wordRow).join(''):'<div class="empty">Пока нечего повторять 🎉</div>'}
+function renderReview(){
+ const a=getUnknown();
+ $('#reviewGrid').innerHTML=a.length?a.map(w=>`<div class="wordrow unknown-card"><div class="mini">${artFor(w)}</div><div><b>${w.en}</b><div style="color:var(--muted)">${w.ru}</div></div><span class="unknown-count">Не знаю: ${w.unknownCount||1}</span><button class="heart" onclick='removeUnknown(${JSON.stringify(w.en)})'>×</button></div>`).join(''):'<div class="empty">Здесь пока нет слов 🎉</div>'
+}
 function renderFavorites(){const a=getArr('favorites');$('#favoriteGrid').innerHTML=a.length?a.map(wordRow).join(''):'<div class="empty">Добавляй слова звёздочкой ☆</div>'}
 function renderAchievements(){const done=doneDays(),fav=getArr('favorites').length,rev=getArr('review').length;const items=[['Первый шаг','Пройти 1 день',done>=1],['Неделя','Пройти 7 дней',done>=7],['Финиш','Пройти 14 дней',done>=14],['Коллекционер','Добавить 5 любимых слов',fav>=5],['Без страха','Добавить слово в повторение',rev>=1]];$('#achievementsGrid').innerHTML=items.map(x=>`<div class="panel course-card"><span class="tag">${x[2]?'Получено ✓':'В процессе'}</span><h3>${x[0]}</h3><p style="color:var(--muted)">${x[1]}</p></div>`).join('')}
 function startLesson(){openDay(currentDay)}
-function openDay(day){currentDay=day;lessonStep=0;$('#lessonOverlay').classList.add('open');renderLessonStep()}
-function closeLesson(){$('#lessonOverlay').classList.remove('open');renderToday()}
+function openDay(day){currentDay=day;lessonStep=0;$('#lessonOverlay').classList.add('open');localStorage.setItem(key('last-day'),String(day));renderLessonStep()}
+function closeLesson(){$('#lessonOverlay').classList.remove('open');renderToday();renderResumeBanner()}
 function bars(total,idx){return Array.from({length:total},(_,i)=>`<span class="${i<idx?'done':i===idx?'active':''}"></span>`).join('')}
 function renderLessonStep(){const d=DAYS[currentDay-1],total=7;$('#stepBars').innerHTML=bars(total,lessonStep);$('#stepLabel').textContent=(lessonStep+1)+' из '+total;if(lessonStep<4)renderWord(d.words[lessonStep]);else if(lessonStep===4)renderPhrase(d);else if(lessonStep===5)startQuizUI(d);else renderFinish(d)}
-function renderWord(w){$('#lessonContent').innerHTML=`<div class="word-card"><div><span class="category">${w.cat}</span><div class="big-sticker">${STICKERS[w.icon]}</div><div class="word-en">${w.en} <button class="round" onclick='speak(${JSON.stringify(w.en)})'>🔊</button></div><div class="word-ru">${w.ru}</div></div><div class="lesson-actions"><button class="btn unknown" onclick='markWord(${JSON.stringify(w)},false)'>Не знаю</button><button class="btn dark" onclick='markWord(${JSON.stringify(w)},true)'>Я знаю ✓</button><button class="btn" onclick='toggleFavorite(${JSON.stringify(w)})'>☆</button></div></div>`}
+function renderWord(w){$('#lessonContent').innerHTML=`<div class="word-card"><div><span class="category">${w.cat}</span><div class="big-sticker">${artFor(w)}</div><div class="word-en">${w.en} <button class="round" onclick='speak(${JSON.stringify(w.en)})'>🔊</button></div><div class="word-ru">${w.ru}</div></div><div class="lesson-actions"><button class="btn unknown" onclick='markWord(${JSON.stringify(w)},false)'>Не знаю</button><button class="btn dark" onclick='markWord(${JSON.stringify(w)},true)'>Я знаю ✓</button><button class="btn" onclick='toggleFavorite(${JSON.stringify(w)})'>☆</button></div></div>`}
 function speak(t){const u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=.82;speechSynthesis.cancel();speechSynthesis.speak(u)}
-function markWord(w,known){if(!known){let a=getArr('review');if(!a.some(x=>x.en===w.en)){a.push(w);setArr('review',a)}}lessonStep++;renderLessonStep()}
+function markWord(w,known){if(!known){addUnknownWord(w)}lessonStep++;renderLessonStep()}
 function renderPhrase(d){$('#lessonContent').innerHTML=`<div class="word-card"><div><span class="category">Фраза дня</span><div class="big-sticker">${STICKERS.spark}</div><div class="phrase-box">${d.phrase}</div></div><button class="btn dark" onclick="nextPhrase()">Перейти к тесту →</button></div>`}
 function nextPhrase(){startRichPractice(DAYS[currentDay-1])}
 function buildQuiz(d){const pool=allWords;const q=d.words.map(w=>{const wrong=pool.filter(x=>x.en!==w.en).sort(()=>Math.random()-.5).slice(0,3).map(x=>x.ru);return {w,answer:w.ru,opts:[w.ru,...wrong].sort(()=>Math.random()-.5)}});q.push({w:{en:d.phrase,ru:'Фраза дня',icon:'spark'},answer:'Это фраза дня',opts:['Это фраза дня','Название эффекта','Команда экспорта','Формат видео']});return q.sort(()=>Math.random()-.5)}
 function startQuizUI(d){quiz=buildQuiz(d);quizIndex=0;score=0;renderQuestion()}
-function renderQuestion(){const q=quiz[quizIndex];$('#lessonContent').innerHTML=`<div class="word-card"><div><span class="category">Вопрос ${quizIndex+1} из 5</span><div class="big-sticker">${STICKERS[q.w.icon]||STICKERS.spark}</div><h2>Что означает “${q.w.en}”?</h2><div id="opts">${q.opts.map(o=>`<button class="quiz-option" onclick='answer(${JSON.stringify(o)})'>${o}</button>`).join('')}<button class="quiz-option" onclick="answer('__unknown__')">Не знаю 🤔</button></div><div id="answerNote"></div></div></div>`}
+function renderQuestion(){const q=quiz[quizIndex];$('#lessonContent').innerHTML=`<div class="word-card"><div><span class="category">Вопрос ${quizIndex+1} из 5</span><div class="big-sticker">${artFor(q.w)}</div><h2>Что означает “${q.w.en}”?</h2><div id="opts">${q.opts.map(o=>`<button class="quiz-option" onclick='answer(${JSON.stringify(o)})'>${o}</button>`).join('')}<button class="quiz-option" onclick="answer('__unknown__')">Не знаю 🤔</button></div><div id="answerNote"></div></div></div>`}
 function answer(a){const q=quiz[quizIndex];$$('.quiz-option').forEach(b=>{b.disabled=true;if(b.textContent===q.answer)b.classList.add('correct');if(a!=='__unknown__'&&b.textContent===a&&a!==q.answer)b.classList.add('wrong')});if(a===q.answer)score++;else if(q.w.ru!=='Фраза дня'){let r=getArr('review');if(!r.some(x=>x.en===q.w.en)){r.push(q.w);setArr('review',r)}}$('#answerNote').innerHTML=`<p><b>${a===q.answer?'Правильно ✓':'Правильный ответ: '+q.answer}</b></p><button class="btn dark" onclick="nextQuestion()">Далее →</button>`}
 function nextQuestion(){quizIndex++;if(quizIndex<quiz.length)renderQuestion();else{lessonStep++;renderLessonStep()}}
-function renderFinish(d){localStorage.setItem(key('done-'+currentDay),'1');updateStats();$('#lessonContent').innerHTML=`<div class="word-card"><div><div class="big-sticker">${STICKERS.final}</div><h2>День завершён</h2><p style="color:var(--muted)">4 слова, фраза и тест готовы.</p><p><b>Результат теста: ${score} из 5</b></p></div><div>${d.gpt?'<button class="btn" onclick="copyGPT()">Практика с GPT</button>':''}<button class="btn dark" onclick="closeLesson()">Вернуться на главную</button></div></div>`}
+function renderFinish(d){localStorage.setItem(key('done-'+currentDay),'1');updateStats();$('#lessonContent').innerHTML=`<div class="word-card"><div><div class="big-sticker">${artFor({en:"success",icon:"final"})}</div><h2>День завершён</h2><p style="color:var(--muted)">4 слова, фраза и тест готовы.</p><p><b>Результат теста: ${score} из 5</b></p></div><div>${d.gpt?'<button class="btn" onclick="copyGPT()">Практика с GPT</button>':''}<button class="btn dark" onclick="closeLesson()">Вернуться на главную</button></div></div>`}
 function copyGPT(){const text=`Давай практиковать английский. День ${currentDay}. Не исправляй меня сразу. В конце оцени мой ответ и выпиши слова, которых мне не хватило.`;navigator.clipboard?.writeText(text);alert('Фраза для начала разговора скопирована')}
+
+
+const ART_COLORS=['color-blue','color-yellow','color-coral','color-green','color-purple','color-cyan','color-pink'];
+function artFor(w){
+ const icon=EMOJI_MAP[w.en]||'✨';
+ let sum=0;for(const ch of w.en)sum+=ch.charCodeAt(0);
+ const cls=ART_COLORS[sum%ART_COLORS.length];
+ return `<div class="color-art ${cls}"><div class="symbol">${icon}</div><div class="mini-lines"><i></i><i></i><i></i></div></div>`;
+}
+function getUnknown(){return JSON.parse(localStorage.getItem(key('unknown'))||'[]')}
+function setUnknown(v){localStorage.setItem(key('unknown'),JSON.stringify(v));renderReview();updateStats()}
+function addUnknownWord(w){
+ let a=getUnknown(),item=a.find(x=>x.en===w.en);
+ if(item)item.unknownCount=(item.unknownCount||1)+1;
+ else a.push({...w,unknownCount:1});
+ setUnknown(a);
+}
+function removeUnknown(en){setUnknown(getUnknown().filter(x=>x.en!==en))}
+function saveSession(){
+ const payload={currentDay,exerciseSet,exerciseIndex,exerciseScore,lessonOpen:$('#lessonOverlay').classList.contains('open'),savedAt:Date.now()};
+ localStorage.setItem(key('session'),JSON.stringify(payload));
+ renderResumeBanner();
+}
+function clearSession(){localStorage.removeItem(key('session'));renderResumeBanner()}
+function getSession(){try{return JSON.parse(localStorage.getItem(key('session'))||'null')}catch{return null}}
+function renderResumeBanner(){
+ const s=getSession(),b=$('#resumeBanner');
+ if(s&&s.exerciseSet&&s.exerciseSet.length&&s.exerciseIndex<s.exerciseSet.length){
+   b.classList.add('show');
+   $('#resumeText').textContent=`День ${s.currentDay}, задание ${s.exerciseIndex+1} из ${s.exerciseSet.length}`;
+ }else b.classList.remove('show');
+}
+function resumeLesson(){
+ const s=getSession();if(!s)return;
+ currentDay=s.currentDay;exerciseSet=s.exerciseSet;exerciseIndex=s.exerciseIndex;exerciseScore=s.exerciseScore||0;
+ $('#lessonOverlay').classList.add('open');renderExercise();
+}
 
 const EMOJI_MAP={
  reliable:'🤝', actually:'💡', timeline:'🎞️', footage:'🎬', prefer:'❤️', instead:'🔄',
@@ -202,7 +274,7 @@ function renderStatus(w){
  return `<div class="status-row">${WORD_STATUS_ORDER.map(s=>`<span class="status-pill ${getWordStatus(w.en)===s?'active':''}">${s}</span>`).join('')}</div>`;
 }
 function startRichPractice(d){
- exerciseSet=makeExerciseSet(d);exerciseIndex=0;exerciseScore=0;renderExercise();
+ exerciseSet=makeExerciseSet(d);exerciseIndex=0;exerciseScore=0;saveSession();renderExercise();
 }
 function renderExercise(){
  const ex=exerciseSet[exerciseIndex],w=ex.w,all=allWords;
@@ -244,7 +316,7 @@ function renderExercise(){
 }
 function addChunk(chunk,i){
  letterAnswer+=chunk;
- $('#letterAnswer').textContent=letterAnswer;
+ $('#letterAnswer').textContent=letterAnswer;localStorage.setItem(key('partial-letter'),letterAnswer);
  $('#lc'+i).disabled=true;
 }
 function expectedAnswer(ex){
@@ -257,22 +329,23 @@ function submitExercise(answer){
  const ex=exerciseSet[exerciseIndex],correct=expectedAnswer(ex);
  const ok=answer!=='__unknown__'&&normalizeText(answer)===normalizeText(correct);
  if(ok){exerciseScore++;bumpWordStatus(ex.w.en)}
+ else if(answer==='__unknown__')addUnknownWord(ex.w);
  else addReviewWord(ex.w);
  $('#exerciseNote').innerHTML=`<p><b>${ok?'Правильно ✓':'Правильный ответ: '+correct}</b></p><button class="btn dark" onclick="nextExercise()">Далее →</button>`;
- $$('.quiz-option,.emoji-btn,.letter-chip,.type-input,.mic-btn').forEach(x=>x.disabled=true);
+ $$('.quiz-option,.emoji-btn,.letter-chip,.type-input,.mic-btn').forEach(x=>x.disabled=true);saveSession();
 }
 function nextExercise(){
- exerciseIndex++;
+ exerciseIndex++;saveSession();
  if(exerciseIndex<exerciseSet.length)renderExercise();else finishRichPractice();
 }
 function finishRichPractice(){
  const pass=exerciseScore>=Math.ceil(exerciseSet.length*.7);
  if(pass){
-  localStorage.setItem(key('done-'+currentDay),'1');
+  localStorage.setItem(key('done-'+currentDay),'1');clearSession();
   updateStats();
-  $('#lessonContent').innerHTML=`<div class="word-card"><div><div class="big-sticker">${STICKERS.final}</div><h2>День завершён</h2><p style="color:var(--muted)">Ты потренировала слова несколькими способами.</p><p><b>Результат: ${exerciseScore} из ${exerciseSet.length}</b></p></div><div><button class="btn dark" onclick="closeLesson()">Вернуться на главную</button></div></div>`;
+  $('#lessonContent').innerHTML=`<div class="word-card"><div><div class="big-sticker">${artFor({en:"success",icon:"final"})}</div><h2>День завершён</h2><p style="color:var(--muted)">Ты потренировала слова несколькими способами.</p><p><b>Результат: ${exerciseScore} из ${exerciseSet.length}</b></p></div><div><button class="btn dark" onclick="closeLesson()">Вернуться на главную</button></div></div>`;
  }else{
-  $('#lessonContent').innerHTML=`<div class="word-card"><div><div class="big-sticker">${STICKERS.warning}</div><h2>Нужно ещё повторить</h2><p style="color:var(--muted)">Чтобы завершить день, нужно минимум 70% правильных ответов.</p><p><b>Результат: ${exerciseScore} из ${exerciseSet.length}</b></p></div><div><button class="btn" onclick="showReviewView()">Открыть повторение</button><button class="btn dark" onclick="startRichPractice(DAYS[currentDay-1])">Повторить практику</button></div></div>`;
+  $('#lessonContent').innerHTML=`<div class="word-card"><div><div class="big-sticker">${artFor({en:"review",icon:"warning"})}</div><h2>Нужно ещё повторить</h2><p style="color:var(--muted)">Чтобы завершить день, нужно минимум 70% правильных ответов.</p><p><b>Результат: ${exerciseScore} из ${exerciseSet.length}</b></p></div><div><button class="btn" onclick="showReviewView()">Открыть повторение</button><button class="btn dark" onclick="startRichPractice(DAYS[currentDay-1])">Повторить практику</button></div></div>`;
  }
 }
 function startSpeechCheck(){
@@ -293,7 +366,7 @@ function startSpeechCheck(){
  r.start();
 }
 
-renderDictionary();renderToday();
+renderDictionary();renderToday();renderResumeBanner();
 let deferredPrompt=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e});
 if('serviceWorker'in navigator)navigator.serviceWorker.register('./service-worker.js');
 </script></body></html>
