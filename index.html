@@ -20,6 +20,25 @@ button,input{font:inherit}.shell{max-width:1180px;margin:auto;min-height:100vh;p
 .lesson-overlay{position:fixed;inset:0;background:rgba(245,245,245,.98);z-index:30;display:none;overflow:auto}.lesson-overlay.open{display:block}.lesson-wrap{max-width:520px;margin:auto;padding:18px 18px 90px}.lesson-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.back{border:0;background:none;font-size:24px}.steps{display:flex;gap:6px;flex:1;margin:0 18px}.steps span{height:6px;background:#e5e6e8;border-radius:99px;flex:1}.steps span.active{background:#6f737c}.steps span.done{background:var(--dark)}.word-card{background:#fff;border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);padding:22px;text-align:center;min-height:610px;display:flex;flex-direction:column;justify-content:space-between}.big-sticker{width:210px;height:210px;margin:10px auto}.big-sticker svg{width:100%;height:100%}.word-en{font-size:43px;font-weight:950}.word-ru{font-size:21px;color:var(--muted);margin-top:4px}.category{display:inline-block;margin-top:10px;background:var(--soft);padding:7px 10px;border-radius:99px;color:var(--muted);font-size:12px;font-weight:900}.lesson-actions{display:grid;grid-template-columns:1fr 1fr auto;gap:9px;margin-top:18px}.btn{border-radius:14px;padding:13px;border:1px solid var(--line);background:#fff;font-weight:850;cursor:pointer}.btn.dark{background:var(--dark);color:#fff;border-color:var(--dark)}.btn.unknown{border-style:dashed;color:var(--muted)}.phrase-box{font-size:28px;font-weight:900;line-height:1.3;background:var(--soft);border-radius:22px;padding:28px}.quiz-option{width:100%;text-align:left;padding:14px;border:1px solid var(--line);background:#fff;border-radius:14px;margin:6px 0;cursor:pointer}.quiz-option.selected{outline:2px solid var(--dark)}.quiz-option.correct{background:#edf7f1;border-color:#79a98f}.quiz-option.wrong{background:#fff0f0;border-color:#ca8383}.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.stat{padding:20px;text-align:center}.stat strong{font-size:34px;display:block}.empty{padding:28px;text-align:center;color:var(--muted)}
 .mobile-nav{display:none}
 @media(max-width:820px){.shell{padding:0}.app{display:block}.sidebar{display:none}.main{padding:16px 14px 88px}.toprow{display:block}.progress-mini{margin-top:12px;min-width:0}.lesson-summary{grid-template-columns:1fr 1fr}.summary-item{border:0}.lesson-summary .cta{grid-column:1/-1}.course-grid,.wordgrid,.stats-grid{grid-template-columns:1fr}.practice{align-items:flex-start}.mobile-nav{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:9px;right:9px;bottom:9px;background:rgba(255,255,255,.96);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);z-index:20}.mobile-nav button{border:0;background:none;padding:11px 4px;color:var(--muted);font-size:11px}.mobile-nav button.active{color:var(--text);font-weight:900}}
+
+.exercise-card{background:#fff;border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);padding:22px;min-height:610px;display:flex;flex-direction:column;justify-content:space-between}
+.exercise-title{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:900}
+.exercise-prompt{font-size:30px;font-weight:950;line-height:1.2;margin:18px 0;text-align:center}
+.exercise-sub{color:var(--muted);text-align:center;line-height:1.5}
+.type-input{width:100%;padding:15px 16px;border:1px solid var(--line);border-radius:14px;font-size:20px;text-align:center;margin-top:14px}
+.emoji-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px}
+.emoji-btn{border:1px solid var(--line);background:#fff;border-radius:18px;padding:18px;font-size:34px;cursor:pointer}
+.emoji-btn.selected{outline:2px solid var(--dark)}
+.letters{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:18px 0}
+.letter-chip{border:1px solid var(--line);background:#fff;padding:10px 13px;border-radius:12px;font-weight:900;cursor:pointer}
+.answer-line{min-height:48px;border-bottom:2px solid var(--dark);font-size:24px;font-weight:900;text-align:center;padding:8px}
+.status-row{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:12px}
+.status-pill{padding:7px 10px;border-radius:999px;background:var(--soft);font-size:12px;font-weight:900;color:var(--muted)}
+.status-pill.active{background:var(--dark);color:#fff}
+.mic-btn{width:92px;height:92px;border-radius:50%;border:0;background:var(--dark);color:#fff;font-size:36px;display:grid;place-items:center;margin:18px auto;cursor:pointer}
+.mic-btn.listening{animation:pulse 1s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(34,38,47,.25)}70%{box-shadow:0 0 0 24px rgba(34,38,47,0)}100%{box-shadow:0 0 0 0 rgba(34,38,47,0)}}
+
 </style></head><body>
 <div class="shell"><div class="app">
 <aside class="sidebar"><div class="brand"><div class="brandmark">EN</div><div>English<br>with Tanya</div></div>
@@ -46,7 +65,7 @@ button,input{font:inherit}.shell{max-width:1180px;margin:auto;min-height:100vh;p
     <path d="M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z" fill="#fff" stroke="#22262f" stroke-width="3"/>
     <text x="60" y="73" text-anchor="middle" font-size="46" font-family="Arial, sans-serif" fill="#22262f">✦</text>
     </svg></div></div>
-<div class="summary-item"><div>Мини-тест</div><b>5 вопросов</b><div class="sticker"><svg viewBox="0 0 120 120" aria-hidden="true">
+<div class="summary-item"><div>Практика со всех сторон</div><b>12 заданий</b><div class="sticker"><svg viewBox="0 0 120 120" aria-hidden="true">
     <path d="M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z" fill="#fff" stroke="#22262f" stroke-width="3"/>
     <text x="60" y="73" text-anchor="middle" font-size="46" font-family="Arial, sans-serif" fill="#22262f">▤</text>
     </svg></div></div>
@@ -83,7 +102,7 @@ function openView(v){$$('.view').forEach(x=>x.classList.remove('active'));$$('[d
 $$('[data-view]').forEach(b=>b.onclick=()=>openView(b.dataset.view));
 function renderToday(){currentDay=currentIncomplete();const d=DAYS[currentDay-1];$('#todayTitle').textContent='День '+currentDay;$('#progressSub').textContent='День '+currentDay+' из 14';$('#todayWords').innerHTML=d.words.map(w=>`<span class="chip">${w.en}</span>`).join('');$('#gptBtn').disabled=!d.gpt;$('#gptBtn').textContent=d.gpt?'Начать разговор':'Сегодня без практики';updateStats()}
 function updateStats(){const done=doneDays(),pct=Math.round(done/14*100),rev=getArr('review'),fav=getArr('favorites');$('#progressPct').textContent=pct+'%';$('#progressBar').style.width=pct+'%';$('#statDays').textContent=done;$('#statWords').textContent=done*4;$('#statReview').textContent=rev.length;$('#reviewBadge').textContent=rev.length?rev.length:'';$('#streakCount').textContent=Math.max(1,done)+' '+(done===1?'день':'дней');renderCourse();renderReview();renderFavorites();renderAchievements()}
-function renderCourse(){$('#courseGrid').innerHTML=DAYS.map((d,i)=>`<div class="panel course-card ${localStorage.getItem(key('done-'+(i+1)))==='1'?'done':''}" onclick="openDay(${i+1})"><span class="tag">День ${i+1}</span><h3>${d.title}</h3><p style="color:var(--muted)">4 слова · 1 фраза · тест${d.gpt?' · GPT':''}</p></div>`).join('')}
+function renderCourse(){$('#courseGrid').innerHTML=DAYS.map((d,i)=>`<div class="panel course-card ${localStorage.getItem(key('done-'+(i+1)))==='1'?'done':''}" onclick="openDay(${i+1})"><span class="tag">День ${i+1}</span><h3>${d.title}</h3><p style="color:var(--muted)">4 слова · разные задания · GPT${d.gpt?' · GPT':''}</p></div>`).join('')}
 function renderDictionary(q=''){const list=allWords.filter(w=>(w.en+' '+w.ru).toLowerCase().includes(q.toLowerCase()));$('#dictionaryGrid').innerHTML=list.map(wordRow).join('')}
 function wordRow(w){const fav=getArr('favorites').some(x=>x.en===w.en);return `<div class="wordrow"><div class="mini">${STICKERS[w.icon]}</div><div><b>${w.en}</b><div style="color:var(--muted)">${w.ru}</div></div><button class="heart" onclick='toggleFavorite(${JSON.stringify(w)})'>${fav?'★':'☆'}</button></div>`}
 $('#search').oninput=e=>renderDictionary(e.target.value);
@@ -100,7 +119,7 @@ function renderWord(w){$('#lessonContent').innerHTML=`<div class="word-card"><di
 function speak(t){const u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=.82;speechSynthesis.cancel();speechSynthesis.speak(u)}
 function markWord(w,known){if(!known){let a=getArr('review');if(!a.some(x=>x.en===w.en)){a.push(w);setArr('review',a)}}lessonStep++;renderLessonStep()}
 function renderPhrase(d){$('#lessonContent').innerHTML=`<div class="word-card"><div><span class="category">Фраза дня</span><div class="big-sticker">${STICKERS.spark}</div><div class="phrase-box">${d.phrase}</div></div><button class="btn dark" onclick="nextPhrase()">Перейти к тесту →</button></div>`}
-function nextPhrase(){lessonStep++;renderLessonStep()}
+function nextPhrase(){startRichPractice(DAYS[currentDay-1])}
 function buildQuiz(d){const pool=allWords;const q=d.words.map(w=>{const wrong=pool.filter(x=>x.en!==w.en).sort(()=>Math.random()-.5).slice(0,3).map(x=>x.ru);return {w,answer:w.ru,opts:[w.ru,...wrong].sort(()=>Math.random()-.5)}});q.push({w:{en:d.phrase,ru:'Фраза дня',icon:'spark'},answer:'Это фраза дня',opts:['Это фраза дня','Название эффекта','Команда экспорта','Формат видео']});return q.sort(()=>Math.random()-.5)}
 function startQuizUI(d){quiz=buildQuiz(d);quizIndex=0;score=0;renderQuestion()}
 function renderQuestion(){const q=quiz[quizIndex];$('#lessonContent').innerHTML=`<div class="word-card"><div><span class="category">Вопрос ${quizIndex+1} из 5</span><div class="big-sticker">${STICKERS[q.w.icon]||STICKERS.spark}</div><h2>Что означает “${q.w.en}”?</h2><div id="opts">${q.opts.map(o=>`<button class="quiz-option" onclick='answer(${JSON.stringify(o)})'>${o}</button>`).join('')}<button class="quiz-option" onclick="answer('__unknown__')">Не знаю 🤔</button></div><div id="answerNote"></div></div></div>`}
@@ -108,6 +127,172 @@ function answer(a){const q=quiz[quizIndex];$$('.quiz-option').forEach(b=>{b.disa
 function nextQuestion(){quizIndex++;if(quizIndex<quiz.length)renderQuestion();else{lessonStep++;renderLessonStep()}}
 function renderFinish(d){localStorage.setItem(key('done-'+currentDay),'1');updateStats();$('#lessonContent').innerHTML=`<div class="word-card"><div><div class="big-sticker">${STICKERS.final}</div><h2>День завершён</h2><p style="color:var(--muted)">4 слова, фраза и тест готовы.</p><p><b>Результат теста: ${score} из 5</b></p></div><div>${d.gpt?'<button class="btn" onclick="copyGPT()">Практика с GPT</button>':''}<button class="btn dark" onclick="closeLesson()">Вернуться на главную</button></div></div>`}
 function copyGPT(){const text=`Давай практиковать английский. День ${currentDay}. Не исправляй меня сразу. В конце оцени мой ответ и выпиши слова, которых мне не хватило.`;navigator.clipboard?.writeText(text);alert('Фраза для начала разговора скопирована')}
+
+const EMOJI_MAP={
+ reliable:'🤝', actually:'💡', timeline:'🎞️', footage:'🎬', prefer:'❤️', instead:'🔄',
+ transition:'➡️', trim:'✂️', manage:'✅', probably:'🤔', deadline:'📅', revision:'✏️',
+ clarify:'❓', specific:'🎯', feedback:'💬', draft:'📄', reason:'💡', effective:'⚡',
+ pacing:'⏱️', sequence:'🎞️', experience:'🏅', improve:'📈', keyframe:'◇', masking:'🎭',
+ recognize:'👁️', accurate:'📏', render:'⏳', export:'📤', suggest:'💡', compare:'⚖️',
+ contrast:'◐', saturation:'🎨', issue:'⚠️', solution:'🧩', 'audio levels':'🔊',
+ 'noise reduction':'🔇', attention:'📣', relevant:'📌', hook:'🪝', engagement:'❤️',
+ subtle:'🪶', dynamic:'⚡', 'color grading':'🎨', 'white balance':'⚪',
+ reasonable:'👍', available:'🕒', deliverables:'📦', requirements:'📋',
+ context:'🧠', emotion:'😊', 'b-roll':'📹', 'close-up':'🔍', express:'💬',
+ continue:'➡️', 'final version':'✅', reference:'🖼️'
+};
+const EXAMPLE_MAP={
+ reliable:'She is a reliable editor.', actually:'Actually, I prefer this version.',
+ timeline:'The clip is on the timeline.', footage:'I need to review the footage.',
+ prefer:'I prefer short videos.', instead:'Let us use this shot instead.',
+ transition:'I added a smooth transition.', trim:'Please trim this clip.',
+ manage:'I can manage two projects.', probably:'I will probably finish tonight.',
+ deadline:'The deadline is next Friday.', revision:'The client asked for a revision.',
+ clarify:'Could you clarify this part?', specific:'Could you be more specific?',
+ feedback:'Thanks for the feedback.', draft:'I will send the draft today.',
+ reason:'The main reason is the pacing.', effective:'This version is more effective.',
+ pacing:'The pacing feels too slow.', sequence:'This sequence needs more energy.',
+ experience:'I have experience with reels.', improve:'I want to improve my English.',
+ keyframe:'Add a keyframe here.', masking:'Masking can hide this area.',
+ recognize:'I recognize this word.', accurate:'This answer is more accurate.',
+ render:'The video is rendering now.', export:'Export the final version.',
+ suggest:'I suggest changing the music.', compare:'Let us compare both versions.',
+ contrast:'The contrast is too strong.', saturation:'Reduce the saturation slightly.',
+ issue:'There is an issue with the audio.', solution:'I found a simple solution.',
+ 'audio levels':'The audio levels are too high.', 'noise reduction':'Use noise reduction here.',
+ attention:'The first seconds grab attention.', relevant:'The topic is relevant.',
+ hook:'The hook needs to be stronger.', engagement:'This reel has strong engagement.',
+ subtle:'The transition should be subtle.', dynamic:'The edit feels dynamic.',
+ 'color grading':'The color grading feels cinematic.', 'white balance':'Adjust the white balance.',
+ reasonable:'That sounds reasonable.', available:'I am available on Thursday.',
+ deliverables:'The deliverables are ready.', requirements:'Let us review the requirements.',
+ context:'The audience needs more context.', emotion:'This scene creates emotion.',
+ 'b-roll':'Add some b-roll here.', 'close-up':'Use a close-up for this moment.',
+ express:'I can express my ideas clearly.', continue:'I want to continue practicing.',
+ 'final version':'The final version is ready.', reference:'Please send me a reference.'
+};
+const WORD_STATUS_ORDER=['Новое','Видела','Учишь','Запомнила','Использовала'];
+function getWordStatus(en){return localStorage.getItem(key('status-'+en))||'Новое'}
+function setWordStatus(en,status){localStorage.setItem(key('status-'+en),status)}
+function bumpWordStatus(en){
+ const cur=getWordStatus(en),i=WORD_STATUS_ORDER.indexOf(cur);
+ setWordStatus(en,WORD_STATUS_ORDER[Math.min(i+1,WORD_STATUS_ORDER.length-1)]);
+}
+function addReviewWord(w){
+ let r=getArr('review');
+ if(!r.some(x=>x.en===w.en)){r.push(w);setArr('review',r)}
+}
+function normalizeText(t){return (t||'').toLowerCase().trim().replace(/[.!?,]/g,'').replace(/\s+/g,' ')}
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+function makeExerciseSet(d){
+ const set=[];
+ d.words.forEach(w=>{
+   set.push({type:'translate',w});
+   set.push({type:'reverse',w});
+   set.push({type:'type',w});
+   set.push({type:'emoji',w});
+   set.push({type:'letters',w});
+   set.push({type:'blank',w});
+   set.push({type:'speak',w});
+ });
+ return shuffle(set).slice(0,12);
+}
+let exerciseSet=[],exerciseIndex=0,exerciseScore=0,exerciseAnswer='',letterAnswer='';
+function renderStatus(w){
+ return `<div class="status-row">${WORD_STATUS_ORDER.map(s=>`<span class="status-pill ${getWordStatus(w.en)===s?'active':''}">${s}</span>`).join('')}</div>`;
+}
+function startRichPractice(d){
+ exerciseSet=makeExerciseSet(d);exerciseIndex=0;exerciseScore=0;renderExercise();
+}
+function renderExercise(){
+ const ex=exerciseSet[exerciseIndex],w=ex.w,all=allWords;
+ $('#stepBars').innerHTML=bars(exerciseSet.length,exerciseIndex);
+ $('#stepLabel').textContent=(exerciseIndex+1)+' из '+exerciseSet.length;
+ let body='';
+ if(ex.type==='translate'){
+  const opts=shuffle([w.ru,...shuffle(all.filter(x=>x.en!==w.en)).slice(0,3).map(x=>x.ru)]);
+  body=`<div class="exercise-title">Выбери перевод</div><div class="exercise-prompt">${w.en}</div>${renderStatus(w)}<div class="options">${opts.map(o=>`<button class="quiz-option" onclick='submitExercise(${JSON.stringify(o)})'>${o}</button>`).join('')}<button class="quiz-option" onclick="submitExercise('__unknown__')">Не знаю 🤔</button></div>`;
+ }
+ if(ex.type==='reverse'){
+  const opts=shuffle([w.en,...shuffle(all.filter(x=>x.en!==w.en)).slice(0,3).map(x=>x.en)]);
+  body=`<div class="exercise-title">Выбери английское слово</div><div class="exercise-prompt">${w.ru}</div>${renderStatus(w)}<div class="options">${opts.map(o=>`<button class="quiz-option" onclick='submitExercise(${JSON.stringify(o)})'>${o}</button>`).join('')}<button class="quiz-option" onclick="submitExercise('__unknown__')">Не знаю 🤔</button></div>`;
+ }
+ if(ex.type==='type'){
+  body=`<div class="exercise-title">Напиши по-английски</div><div class="exercise-prompt">${w.ru}</div>${renderStatus(w)}<input class="type-input" id="typeAnswer" placeholder="Напиши слово"><button class="btn dark" onclick="submitExercise($('#typeAnswer').value)">Проверить</button><button class="btn unknown" onclick="submitExercise('__unknown__')">Не знаю</button>`;
+ }
+ if(ex.type==='emoji'){
+  const correct=EMOJI_MAP[w.en]||'💡';
+  const pool=shuffle(['🎬','✂️','📅','💬','🤝','🎨','🔊','📤','⚡','🧩'].filter(x=>x!==correct)).slice(0,3);
+  const opts=shuffle([correct,...pool]);
+  body=`<div class="exercise-title">Выбери ассоциацию</div><div class="exercise-prompt">${w.en}</div>${renderStatus(w)}<div class="emoji-grid">${opts.map(o=>`<button class="emoji-btn" onclick='submitExercise(${JSON.stringify(o)})'>${o}</button>`).join('')}</div><button class="btn unknown" onclick="submitExercise('__unknown__')">Не знаю</button>`;
+ }
+ if(ex.type==='letters'){
+  const chunks=w.en.includes(' ')?w.en.split(' '):w.en.match(/.{1,2}/g);
+  const opts=shuffle(chunks);
+  letterAnswer='';
+  body=`<div class="exercise-title">Собери слово</div><div class="exercise-prompt">${w.ru}</div>${renderStatus(w)}<div class="answer-line" id="letterAnswer"></div><div class="letters">${opts.map((o,i)=>`<button class="letter-chip" id="lc${i}" onclick='addChunk(${JSON.stringify(o)},${i})'>${o}</button>`).join('')}</div><button class="btn dark" onclick="submitExercise(letterAnswer)">Проверить</button>`;
+ }
+ if(ex.type==='blank'){
+  const sentence=EXAMPLE_MAP[w.en]||`I use ${w.en}.`;
+  const blank=sentence.replace(new RegExp(w.en.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'i'),'_____');
+  body=`<div class="exercise-title">Вставь пропущенное слово</div><div class="exercise-prompt">${blank}</div>${renderStatus(w)}<input class="type-input" id="typeAnswer" placeholder="${w.ru}"><button class="btn dark" onclick="submitExercise($('#typeAnswer').value)">Проверить</button>`;
+ }
+ if(ex.type==='speak'){
+  body=`<div class="exercise-title">Произнеси слово</div><div class="exercise-prompt">${w.en}</div>${renderStatus(w)}<button class="mic-btn" id="micBtn" onclick="startSpeechCheck()">🎤</button><div class="exercise-sub" id="speechNote">Нажми и произнеси слово. Если браузер не поддерживает распознавание, оцени себя вручную.</div><div class="lesson-actions"><button class="btn unknown" onclick="submitExercise('__unknown__')">Не получилось</button><button class="btn dark" onclick="submitExercise('${w.en}')">Я произнесла правильно</button></div>`;
+ }
+ $('#lessonContent').innerHTML=`<div class="exercise-card"><div>${body}<div id="exerciseNote"></div></div></div>`;
+}
+function addChunk(chunk,i){
+ letterAnswer+=chunk;
+ $('#letterAnswer').textContent=letterAnswer;
+ $('#lc'+i).disabled=true;
+}
+function expectedAnswer(ex){
+ if(ex.type==='translate')return ex.w.ru;
+ if(ex.type==='reverse')return ex.w.en;
+ if(ex.type==='emoji')return EMOJI_MAP[ex.w.en]||'💡';
+ return ex.w.en;
+}
+function submitExercise(answer){
+ const ex=exerciseSet[exerciseIndex],correct=expectedAnswer(ex);
+ const ok=answer!=='__unknown__'&&normalizeText(answer)===normalizeText(correct);
+ if(ok){exerciseScore++;bumpWordStatus(ex.w.en)}
+ else addReviewWord(ex.w);
+ $('#exerciseNote').innerHTML=`<p><b>${ok?'Правильно ✓':'Правильный ответ: '+correct}</b></p><button class="btn dark" onclick="nextExercise()">Далее →</button>`;
+ $$('.quiz-option,.emoji-btn,.letter-chip,.type-input,.mic-btn').forEach(x=>x.disabled=true);
+}
+function nextExercise(){
+ exerciseIndex++;
+ if(exerciseIndex<exerciseSet.length)renderExercise();else finishRichPractice();
+}
+function finishRichPractice(){
+ const pass=exerciseScore>=Math.ceil(exerciseSet.length*.7);
+ if(pass){
+  localStorage.setItem(key('done-'+currentDay),'1');
+  updateStats();
+  $('#lessonContent').innerHTML=`<div class="word-card"><div><div class="big-sticker">${STICKERS.final}</div><h2>День завершён</h2><p style="color:var(--muted)">Ты потренировала слова несколькими способами.</p><p><b>Результат: ${exerciseScore} из ${exerciseSet.length}</b></p></div><div><button class="btn dark" onclick="closeLesson()">Вернуться на главную</button></div></div>`;
+ }else{
+  $('#lessonContent').innerHTML=`<div class="word-card"><div><div class="big-sticker">${STICKERS.warning}</div><h2>Нужно ещё повторить</h2><p style="color:var(--muted)">Чтобы завершить день, нужно минимум 70% правильных ответов.</p><p><b>Результат: ${exerciseScore} из ${exerciseSet.length}</b></p></div><div><button class="btn" onclick="showReviewView()">Открыть повторение</button><button class="btn dark" onclick="startRichPractice(DAYS[currentDay-1])">Повторить практику</button></div></div>`;
+ }
+}
+function startSpeechCheck(){
+ const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+ const btn=$('#micBtn'),note=$('#speechNote');
+ if(!SpeechRecognition){note.textContent='Распознавание речи недоступно. Используй кнопку «Я произнесла правильно».';return}
+ const ex=exerciseSet[exerciseIndex],r=new SpeechRecognition();
+ r.lang='en-US';r.interimResults=false;r.maxAlternatives=3;
+ btn.classList.add('listening');note.textContent='Слушаю...';
+ r.onresult=e=>{
+   btn.classList.remove('listening');
+   const heard=[...e.results[0]].map(x=>normalizeText(x.transcript));
+   const ok=heard.some(x=>x.includes(normalizeText(ex.w.en)));
+   note.textContent=ok?'Отлично, распознано: '+e.results[0][0].transcript:'Я услышала: '+e.results[0][0].transcript;
+   if(ok)submitExercise(ex.w.en);
+ };
+ r.onerror=()=>{btn.classList.remove('listening');note.textContent='Не удалось распознать. Попробуй ещё раз или оцени себя вручную.'};
+ r.start();
+}
+
 renderDictionary();renderToday();
 let deferredPrompt=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e});
 if('serviceWorker'in navigator)navigator.serviceWorker.register('./service-worker.js');
