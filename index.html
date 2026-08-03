@@ -1,372 +1,127 @@
-<!doctype html><html lang="ru"><head>
+<!doctype html>
+<html lang="ru">
+<head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#f4f4f4"><link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#6f56d9"><link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="favicon.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
 <title>English with Tanya</title>
 <style>
-:root{--bg:#f4f4f4;--panel:#fff;--text:#17191e;--muted:#7c8089;--line:#e7e8ea;--soft:#f1f2f3;--dark:#22262f;--shadow:0 16px 42px rgba(20,24,32,.08);--green:#2e7652;--red:#a74f4f}
-*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:linear-gradient(180deg,#fbfbfb,#f0f0f0);color:var(--text)}
-button,input{font:inherit}.shell{max-width:1180px;margin:auto;min-height:100vh;padding:18px}.app{display:grid;grid-template-columns:220px 1fr;gap:18px}
-.sidebar,.panel{background:var(--panel);border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow)}.sidebar{padding:16px;position:sticky;top:18px;height:calc(100vh - 36px);display:flex;flex-direction:column}
-.brand{display:flex;align-items:center;gap:11px;font-weight:950;margin-bottom:20px}.brandmark{width:42px;height:42px;border-radius:14px;background:var(--dark);color:#fff;display:grid;place-items:center;font-size:13px}
-.navbtn{width:100%;display:flex;align-items:center;gap:11px;border:0;background:transparent;color:var(--text);padding:12px;border-radius:14px;text-align:left;cursor:pointer;margin:2px 0}.navbtn.active{background:var(--soft)}.navicon{width:22px;text-align:center;color:#4c525e}
-.streak{margin-top:auto;background:var(--soft);border-radius:18px;padding:14px}.streak strong{font-size:20px;display:block}.week{display:flex;justify-content:space-between;color:var(--muted);font-size:11px;margin-top:10px}.week i{width:18px;height:18px;border-radius:50%;background:#dfe1e4;display:grid;place-items:center;font-style:normal}.week i.done{background:var(--dark);color:#fff}
-.main{min-width:0}.view{display:none}.view.active{display:block}.toprow{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:16px}.title h1{font-size:42px;margin:0 0 4px}.title p{margin:0;color:var(--muted)}.profile{display:flex;gap:9px}.round{width:42px;height:42px;border-radius:50%;background:var(--panel);border:1px solid var(--line);display:grid;place-items:center}
-.progress-mini{min-width:260px;padding:16px}.progress-head{display:flex;justify-content:space-between;font-weight:850;margin-bottom:10px}.track{height:9px;background:#e9eaec;border-radius:99px;overflow:hidden}.bar{height:100%;background:var(--dark);width:0}
-.dashboard{padding:22px}.lesson-summary{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:14px;align-items:center}.summary-item{text-align:center;padding:14px;border-right:1px solid var(--line)}.summary-item:last-of-type{border-right:0}.sticker{width:92px;height:92px;margin:auto;filter:drop-shadow(0 8px 12px rgba(0,0,0,.08))}.sticker svg{width:100%;height:100%}.cta{border:0;background:var(--dark);color:#fff;padding:14px 20px;border-radius:14px;font-weight:900;cursor:pointer;box-shadow:0 10px 20px rgba(34,38,47,.18)}
-.words-preview{margin-top:18px;border-top:1px solid var(--line);padding-top:16px}.wordchips{display:flex;gap:9px;flex-wrap:wrap}.chip{background:var(--soft);padding:9px 11px;border-radius:12px;font-weight:800}.practice{margin-top:16px;padding:18px;display:flex;align-items:center;justify-content:space-between;gap:18px}.bot{width:78px;height:78px;border-radius:24px;background:var(--dark);color:#fff;display:grid;place-items:center;font-size:30px}
-.course-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.course-card{padding:18px;cursor:pointer}.course-card.done{background:#f2f7f4}.course-card h3{margin:7px 0}.tag{display:inline-block;padding:6px 9px;background:var(--soft);border-radius:99px;color:var(--muted);font-size:12px;font-weight:850}
-.dictionary{padding:20px}.search{width:100%;padding:13px 15px;border:1px solid var(--line);border-radius:14px;margin-bottom:14px}.wordgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.wordrow{display:flex;align-items:center;gap:12px;padding:13px;background:#fafafa;border:1px solid var(--line);border-radius:16px}.wordrow .mini{width:54px;height:54px;flex:0 0 auto}.wordrow .mini svg{width:100%;height:100%}.heart{margin-left:auto;border:0;background:none;font-size:20px;cursor:pointer}
-.lesson-overlay{position:fixed;inset:0;background:rgba(245,245,245,.98);z-index:30;display:none;overflow:auto}.lesson-overlay.open{display:block}.lesson-wrap{max-width:520px;margin:auto;padding:18px 18px 90px}.lesson-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.back{border:0;background:none;font-size:24px}.steps{display:flex;gap:6px;flex:1;margin:0 18px}.steps span{height:6px;background:#e5e6e8;border-radius:99px;flex:1}.steps span.active{background:#6f737c}.steps span.done{background:var(--dark)}.word-card{background:#fff;border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);padding:22px;text-align:center;min-height:610px;display:flex;flex-direction:column;justify-content:space-between}.big-sticker{width:210px;height:210px;margin:10px auto}.big-sticker svg{width:100%;height:100%}.word-en{font-size:43px;font-weight:950}.word-ru{font-size:21px;color:var(--muted);margin-top:4px}.category{display:inline-block;margin-top:10px;background:var(--soft);padding:7px 10px;border-radius:99px;color:var(--muted);font-size:12px;font-weight:900}.lesson-actions{display:grid;grid-template-columns:1fr 1fr auto;gap:9px;margin-top:18px}.btn{border-radius:14px;padding:13px;border:1px solid var(--line);background:#fff;font-weight:850;cursor:pointer}.btn.dark{background:var(--dark);color:#fff;border-color:var(--dark)}.btn.unknown{border-style:dashed;color:var(--muted)}.phrase-box{font-size:28px;font-weight:900;line-height:1.3;background:var(--soft);border-radius:22px;padding:28px}.quiz-option{width:100%;text-align:left;padding:14px;border:1px solid var(--line);background:#fff;border-radius:14px;margin:6px 0;cursor:pointer}.quiz-option.selected{outline:2px solid var(--dark)}.quiz-option.correct{background:#edf7f1;border-color:#79a98f}.quiz-option.wrong{background:#fff0f0;border-color:#ca8383}.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.stat{padding:20px;text-align:center}.stat strong{font-size:34px;display:block}.empty{padding:28px;text-align:center;color:var(--muted)}
-.mobile-nav{display:none}
-@media(max-width:820px){.shell{padding:0}.app{display:block}.sidebar{display:none}.main{padding:16px 14px 88px}.toprow{display:block}.progress-mini{margin-top:12px;min-width:0}.lesson-summary{grid-template-columns:1fr 1fr}.summary-item{border:0}.lesson-summary .cta{grid-column:1/-1}.course-grid,.wordgrid,.stats-grid{grid-template-columns:1fr}.practice{align-items:flex-start}.mobile-nav{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:9px;right:9px;bottom:9px;background:rgba(255,255,255,.96);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);z-index:20}.mobile-nav button{border:0;background:none;padding:11px 4px;color:var(--muted);font-size:11px}.mobile-nav button.active{color:var(--text);font-weight:900}}
-
-.exercise-card{background:#fff;border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);padding:22px;min-height:610px;display:flex;flex-direction:column;justify-content:space-between}
-.exercise-title{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:900}
-.exercise-prompt{font-size:30px;font-weight:950;line-height:1.2;margin:18px 0;text-align:center}
-.exercise-sub{color:var(--muted);text-align:center;line-height:1.5}
-.type-input{width:100%;padding:15px 16px;border:1px solid var(--line);border-radius:14px;font-size:20px;text-align:center;margin-top:14px}
-.emoji-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px}
-.emoji-btn{border:1px solid var(--line);background:#fff;border-radius:18px;padding:18px;font-size:34px;cursor:pointer}
-.emoji-btn.selected{outline:2px solid var(--dark)}
-.letters{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:18px 0}
-.letter-chip{border:1px solid var(--line);background:#fff;padding:10px 13px;border-radius:12px;font-weight:900;cursor:pointer}
-.answer-line{min-height:48px;border-bottom:2px solid var(--dark);font-size:24px;font-weight:900;text-align:center;padding:8px}
-.status-row{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:12px}
-.status-pill{padding:7px 10px;border-radius:999px;background:var(--soft);font-size:12px;font-weight:900;color:var(--muted)}
-.status-pill.active{background:var(--dark);color:#fff}
-.mic-btn{width:92px;height:92px;border-radius:50%;border:0;background:var(--dark);color:#fff;font-size:36px;display:grid;place-items:center;margin:18px auto;cursor:pointer}
-.mic-btn.listening{animation:pulse 1s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(34,38,47,.25)}70%{box-shadow:0 0 0 24px rgba(34,38,47,0)}100%{box-shadow:0 0 0 0 rgba(34,38,47,0)}}
-
-
-:root{
- --accent-blue:#6f8cff;--accent-yellow:#ffd76f;--accent-coral:#ff8c7a;
- --accent-green:#72d39b;--accent-purple:#a98cff;--accent-cyan:#65cfe8;
-}
-.color-art{
- width:100%;height:100%;border-radius:28px;display:grid;place-items:center;
- position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.8);
- box-shadow:0 16px 30px rgba(44,52,72,.14);
-}
-.color-art:before,.color-art:after{
- content:"";position:absolute;border-radius:50%;filter:blur(1px);opacity:.9
-}
-.color-art:before{width:82px;height:82px;left:-18px;top:-20px;background:rgba(255,255,255,.45)}
-.color-art:after{width:60px;height:60px;right:-14px;bottom:-18px;background:rgba(255,255,255,.36)}
-.color-art .symbol{font-size:64px;position:relative;z-index:2;filter:drop-shadow(0 6px 5px rgba(0,0,0,.12))}
-.color-art .mini-lines{position:absolute;left:16px;right:16px;bottom:13px;display:flex;gap:5px;z-index:2}
-.color-art .mini-lines i{height:5px;flex:1;border-radius:99px;background:rgba(255,255,255,.7)}
-.color-blue{background:linear-gradient(145deg,#89a4ff,#5e76dc)}
-.color-yellow{background:linear-gradient(145deg,#ffe9a9,#f1bd45)}
-.color-coral{background:linear-gradient(145deg,#ffac9e,#ed715e)}
-.color-green{background:linear-gradient(145deg,#9be9ba,#4eb77a)}
-.color-purple{background:linear-gradient(145deg,#c4adff,#8a6ee2)}
-.color-cyan{background:linear-gradient(145deg,#91e4f3,#43b8d3)}
-.color-pink{background:linear-gradient(145deg,#ffb5da,#e977ad)}
-.unknown-card{border-left:5px solid var(--accent-coral)}
-.unknown-count{margin-left:auto;background:#fff0ed;color:#a94736;padding:6px 9px;border-radius:99px;font-size:12px;font-weight:900}
-.resume-banner{display:none;margin-top:14px;padding:16px;background:linear-gradient(135deg,#fff7d6,#ffeaa2);border:1px solid #f1d778;border-radius:18px}
-.resume-banner.show{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.saved-answer-note{font-size:12px;color:var(--muted);text-align:center;margin-top:8px}
-
-</style></head><body>
-<div class="shell"><div class="app">
-<aside class="sidebar"><div class="brand"><div class="brandmark">EN</div><div>English<br>with Tanya</div></div>
-<nav>
-<button class="navbtn active" data-view="today"><span class="navicon">⌂</span>Сегодня</button>
-<button class="navbtn" data-view="course"><span class="navicon">▦</span>Курс</button>
-<button class="navbtn" data-view="dictionary"><span class="navicon">▤</span>Словарь</button>
-<button class="navbtn" data-view="review"><span class="navicon">↻</span>Не знаю <span id="reviewBadge"></span></button>
-<button class="navbtn" data-view="favorites"><span class="navicon">☆</span>Мои слова</button>
-<button class="navbtn" data-view="stats"><span class="navicon">▥</span>Статистика</button>
-<button class="navbtn" data-view="achievements"><span class="navicon">♕</span>Достижения</button>
-</nav>
-<div class="streak"><span>🔥 Серия</span><strong id="streakCount">1 день</strong><div class="week"><i class="done">✓</i><i>•</i><i>•</i><i>•</i><i>•</i><i>•</i><i>•</i></div></div>
-</aside>
-<main class="main">
-<section class="view active" id="today">
-<div class="toprow"><div class="title"><h1 id="todayTitle">День 1</h1><p>Изучай, практикуй, говори!</p></div><div class="panel progress-mini"><div class="progress-head"><span>Прогресс курса</span><span id="progressPct">0%</span></div><div class="track"><div class="bar" id="progressBar"></div></div><p style="color:var(--muted);margin:8px 0 0;font-size:13px" id="progressSub">День 1 из 14</p></div></div>
-<div class="resume-banner" id="resumeBanner"><div><b>У тебя есть незавершённый урок</b><div style="color:#76692e;font-size:13px" id="resumeText"></div></div><button class="btn dark" onclick="resumeLesson()">Продолжить</button></div>
-<div class="panel dashboard"><h2>Сегодня в уроке</h2><div class="lesson-summary">
-<div class="summary-item"><div>Новые слова</div><b>4 слова</b><div class="sticker"><svg viewBox="0 0 120 120" aria-hidden="true">
-    <path d="M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z" fill="#fff" stroke="#22262f" stroke-width="3"/>
-    <text x="60" y="73" text-anchor="middle" font-size="46" font-family="Arial, sans-serif" fill="#22262f">★</text>
-    </svg></div></div>
-<div class="summary-item"><div>Фраза дня</div><b>1 фраза</b><div class="sticker"><svg viewBox="0 0 120 120" aria-hidden="true">
-    <path d="M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z" fill="#fff" stroke="#22262f" stroke-width="3"/>
-    <text x="60" y="73" text-anchor="middle" font-size="46" font-family="Arial, sans-serif" fill="#22262f">✦</text>
-    </svg></div></div>
-<div class="summary-item"><div>Практика со всех сторон</div><b>12 заданий</b><div class="sticker"><svg viewBox="0 0 120 120" aria-hidden="true">
-    <path d="M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z" fill="#fff" stroke="#22262f" stroke-width="3"/>
-    <text x="60" y="73" text-anchor="middle" font-size="46" font-family="Arial, sans-serif" fill="#22262f">▤</text>
-    </svg></div></div>
-<button class="cta" onclick="startLesson()">Начать урок →</button></div>
-<div class="words-preview"><b>Слова на сегодня</b><div class="wordchips" id="todayWords"></div></div></div>
-<div class="panel practice"><div style="display:flex;gap:15px;align-items:center"><div class="bot">●</div><div><h3 style="margin:0 0 5px">Практика речи</h3><div style="color:var(--muted)">Поговори с ChatGPT 5 минут. Дни практики: 3, 6, 9, 12, 14.</div></div></div><button class="btn" id="gptBtn" onclick="copyGPT()">Начать разговор</button></div>
+:root{--bg:#f5f3fb;--card:#fff;--text:#241f33;--muted:#756e87;--p:#6f56d9;--soft:#ece7ff;--line:#e5dff0;--ok:#2f9b68;--bad:#c65d5d;--shadow:0 16px 42px #3d2c6a14}
+[data-theme=dark]{--bg:#15121d;--card:#211c2c;--text:#f5f1ff;--muted:#b9afca;--p:#9b84ef;--soft:#332b47;--line:#3a334b;--ok:#5ed39a;--bad:#ff8c8c;--shadow:0 18px 46px #0005}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,sans-serif;background:linear-gradient(#eae4ff,var(--bg) 390px);color:var(--text);min-height:100vh}
+[data-theme=dark] body{background:linear-gradient(#261e3e,var(--bg) 390px)}
+.app{max-width:760px;margin:auto;padding:18px 14px 72px}.hero,.card{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow)}.hero{padding:24px;position:relative}
+.tag{display:inline-block;background:var(--soft);color:var(--p);padding:7px 11px;border-radius:99px;font-weight:900}h1{font-size:clamp(34px,8vw,56px);line-height:1;margin:12px 0}.muted,.hero p{color:var(--muted);line-height:1.5}.theme{position:absolute;right:16px;top:16px;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:12px;width:42px;height:42px}
+.card{padding:20px;margin-top:14px}.progressline{height:12px;background:var(--soft);border-radius:99px;overflow:hidden;margin:10px 0 4px}.bar{height:100%;background:linear-gradient(90deg,var(--p),#bbaaff);width:0}
+.step{display:none}.step.active{display:block}.word-card{text-align:center;padding:36px 18px}.word-en{font-size:38px;font-weight:950}.word-ru{font-size:20px;color:var(--muted);margin-top:8px}.counter{font-weight:900;color:var(--p)}
+button.main{width:100%;border:0;background:var(--p);color:white;padding:14px;border-radius:14px;font-weight:950;font-size:16px;margin-top:14px}button.alt{width:100%;border:1px solid var(--line);background:var(--card);color:var(--text);padding:13px;border-radius:13px;font-weight:850;margin-top:9px}
+.question{padding:16px;border:1px solid var(--line);border-radius:15px;margin:12px 0}.options{display:grid;gap:8px;margin-top:11px}.opt{border:1px solid var(--line);background:var(--card);color:var(--text);padding:12px;border-radius:12px;text-align:left}.opt.selected{outline:2px solid var(--p)}.opt.correct{background:color-mix(in srgb,var(--ok) 18%,var(--card));border-color:var(--ok)}.opt.wrong{background:color-mix(in srgb,var(--bad) 16%,var(--card));border-color:var(--bad)}
+input[type=text]{width:100%;border:1px solid var(--line);background:var(--card);color:var(--text);padding:13px;border-radius:12px;margin-top:9px}.feedback{font-weight:900;margin-top:10px}.locked{opacity:.55;pointer-events:none}.success{text-align:center;padding:32px 18px}.success h2{font-size:32px}.gpt{background:linear-gradient(135deg,#28223b,#6f56d9);color:white}.gpt p{color:#ffffffcf}.hidden{display:none}
+</style>
+</head>
+<body><main class="app">
+<section class="hero"><span class="tag">Логичный курс · 14 дней</span><h1>English with Tanya</h1><p>Один урок за раз. День завершается только после всех правильных ответов.</p><button class="theme" id="theme">🌙</button></section>
+<section class="card">
+<div><b id="dayTitle">День 1 из 14</b><span style="float:right" id="courseCount">0/14</span></div>
+<div class="progressline"><div class="bar" id="courseBar"></div></div>
 </section>
-<section class="view" id="course"><div class="toprow"><div class="title"><h1>Курс</h1><p>14 дней, 56 слов и 5 разговорных практик.</p></div></div><div class="course-grid" id="courseGrid"></div></section>
-<section class="view" id="dictionary"><div class="toprow"><div class="title"><h1>Словарь</h1><p>Все слова курса в одном месте.</p></div></div><div class="panel dictionary"><input class="search" id="search" placeholder="Найти слово..."><div class="wordgrid" id="dictionaryGrid"></div></div></section>
-<section class="view" id="review"><div class="toprow"><div class="title"><h1>Не знаю</h1><p>Здесь хранятся слова, которые ты сама отметила «Не знаю».</p></div></div><div class="panel dictionary"><div class="wordgrid" id="reviewGrid"></div></div></section>
-<section class="view" id="favorites"><div class="toprow"><div class="title"><h1>Мои слова</h1><p>Избранные слова, которые хочется сохранить.</p></div></div><div class="panel dictionary"><div class="wordgrid" id="favoriteGrid"></div></div></section>
-<section class="view" id="stats"><div class="toprow"><div class="title"><h1>Статистика</h1><p>Твой прогресс без лишней математики.</p></div></div><div class="stats-grid"><div class="panel stat"><strong id="statDays">0</strong>дней пройдено</div><div class="panel stat"><strong id="statWords">0</strong>слов изучено</div><div class="panel stat"><strong id="statReview">0</strong>на повторении</div></div></section>
-<section class="view" id="achievements"><div class="toprow"><div class="title"><h1>Достижения</h1><p>Небольшие цели, которые приятно закрывать.</p></div></div><div class="course-grid" id="achievementsGrid"></div></section>
-</main></div></div>
-
-<nav class="mobile-nav"><button class="active" data-view="today">⌂<br>Сегодня</button><button data-view="course">▦<br>Курс</button><button data-view="dictionary">▤<br>Словарь</button><button data-view="review">?<br>Не знаю</button><button data-view="favorites">☆<br>Мои слова</button></nav>
-
-<div class="lesson-overlay" id="lessonOverlay"><div class="lesson-wrap">
-<div class="lesson-head"><button class="back" onclick="closeLesson()">←</button><div class="steps" id="stepBars"></div><span id="stepLabel">1 из 6</span></div>
-<div id="lessonContent"></div></div></div>
-
+<section id="lesson"></section>
+</main>
 <script>
-const DAYS=[{"title": "Начинаем уверенно", "words": [{"en": "reliable", "ru": "надёжный", "cat": "Общее", "icon": "handshake"}, {"en": "actually", "ru": "на самом деле", "cat": "Разговорное", "icon": "spark"}, {"en": "timeline", "ru": "таймлайн", "cat": "Монтаж", "icon": "timeline"}, {"en": "footage", "ru": "исходный материал", "cat": "Монтаж", "icon": "film"}], "phrase": "To be honest, I prefer this version.", "gpt": false}, {"title": "Монтаж и выбор", "words": [{"en": "prefer", "ru": "предпочитать", "cat": "Общее", "icon": "heart"}, {"en": "instead", "ru": "вместо этого", "cat": "Разговорное", "icon": "swap"}, {"en": "transition", "ru": "переход", "cat": "Монтаж", "icon": "transition"}, {"en": "trim", "ru": "обрезать", "cat": "Монтаж", "icon": "scissors"}], "phrase": "This shot works better.", "gpt": false}, {"title": "Сроки и работа", "words": [{"en": "manage", "ru": "справляться", "cat": "Общее", "icon": "check"}, {"en": "probably", "ru": "вероятно", "cat": "Разговорное", "icon": "cloud"}, {"en": "deadline", "ru": "срок сдачи", "cat": "Работа", "icon": "calendar"}, {"en": "revision", "ru": "правка", "cat": "Монтаж", "icon": "edit"}], "phrase": "The deadline is quite tight.", "gpt": true}, {"title": "Правки клиента", "words": [{"en": "clarify", "ru": "уточнить", "cat": "Общее", "icon": "question"}, {"en": "specific", "ru": "конкретный", "cat": "Общее", "icon": "target"}, {"en": "feedback", "ru": "обратная связь", "cat": "Работа", "icon": "chat"}, {"en": "draft", "ru": "черновик", "cat": "Работа", "icon": "document"}], "phrase": "I can make that change.", "gpt": false}, {"title": "Объясняем решения", "words": [{"en": "reason", "ru": "причина", "cat": "Общее", "icon": "bulb"}, {"en": "effective", "ru": "эффективный", "cat": "Общее", "icon": "bolt"}, {"en": "pacing", "ru": "темп монтажа", "cat": "Монтаж", "icon": "speed"}, {"en": "sequence", "ru": "последовательность кадров", "cat": "Монтаж", "icon": "sequence"}], "phrase": "This works better because...", "gpt": false}, {"title": "Опыт и развитие", "words": [{"en": "experience", "ru": "опыт", "cat": "Общее", "icon": "badge"}, {"en": "improve", "ru": "улучшать", "cat": "Общее", "icon": "arrowup"}, {"en": "keyframe", "ru": "ключевой кадр", "cat": "Монтаж", "icon": "diamond"}, {"en": "masking", "ru": "маскирование", "cat": "Монтаж", "icon": "mask"}], "phrase": "Now I feel more comfortable.", "gpt": true}, {"title": "Повторяем спокойно", "words": [{"en": "recognize", "ru": "узнавать", "cat": "Общее", "icon": "eye"}, {"en": "accurate", "ru": "точный", "cat": "Общее", "icon": "ruler"}, {"en": "render", "ru": "рендерить", "cat": "Монтаж", "icon": "progress"}, {"en": "export", "ru": "экспортировать", "cat": "Монтаж", "icon": "export"}], "phrase": "I know what it means, but...", "gpt": false}, {"title": "Мнение и стиль", "words": [{"en": "suggest", "ru": "предлагать", "cat": "Общее", "icon": "idea"}, {"en": "compare", "ru": "сравнивать", "cat": "Общее", "icon": "compare"}, {"en": "contrast", "ru": "контраст", "cat": "Цвет", "icon": "contrast"}, {"en": "saturation", "ru": "насыщенность", "cat": "Цвет", "icon": "droplet"}], "phrase": "From my point of view...", "gpt": false}, {"title": "Проблемы и решения", "words": [{"en": "issue", "ru": "проблема", "cat": "Общее", "icon": "warning"}, {"en": "solution", "ru": "решение", "cat": "Общее", "icon": "puzzle"}, {"en": "audio levels", "ru": "уровни звука", "cat": "Звук", "icon": "audio"}, {"en": "noise reduction", "ru": "шумоподавление", "cat": "Звук", "icon": "noise"}], "phrase": "I'm looking into it.", "gpt": true}, {"title": "Reels и внимание", "words": [{"en": "attention", "ru": "внимание", "cat": "Общее", "icon": "megaphone"}, {"en": "relevant", "ru": "актуальный", "cat": "Общее", "icon": "pin"}, {"en": "hook", "ru": "зацепка в начале", "cat": "Соцсети", "icon": "hook"}, {"en": "engagement", "ru": "вовлечённость", "cat": "Соцсети", "icon": "likes"}], "phrase": "The first three seconds are crucial.", "gpt": false}, {"title": "Визуальный язык", "words": [{"en": "subtle", "ru": "ненавязчивый", "cat": "Общее", "icon": "feather"}, {"en": "dynamic", "ru": "динамичный", "cat": "Общее", "icon": "motion"}, {"en": "color grading", "ru": "стилистическая цветокоррекция", "cat": "Цвет", "icon": "palette"}, {"en": "white balance", "ru": "баланс белого", "cat": "Цвет", "icon": "balance"}], "phrase": "I'd make it more subtle.", "gpt": false}, {"title": "Переговоры", "words": [{"en": "reasonable", "ru": "разумный", "cat": "Общее", "icon": "thumb"}, {"en": "available", "ru": "доступный, свободный", "cat": "Общее", "icon": "clock"}, {"en": "deliverables", "ru": "результаты работы", "cat": "Работа", "icon": "package"}, {"en": "requirements", "ru": "требования", "cat": "Работа", "icon": "list"}], "phrase": "Could we adjust the deadline?", "gpt": true}, {"title": "История в видео", "words": [{"en": "context", "ru": "контекст", "cat": "Общее", "icon": "context"}, {"en": "emotion", "ru": "эмоция", "cat": "Общее", "icon": "emotion"}, {"en": "b-roll", "ru": "дополнительные кадры", "cat": "Монтаж", "icon": "camera"}, {"en": "close-up", "ru": "крупный план", "cat": "Съёмка", "icon": "zoomface"}], "phrase": "This scene builds emotion.", "gpt": false}, {"title": "Финальный день", "words": [{"en": "express", "ru": "выражать", "cat": "Общее", "icon": "speech"}, {"en": "continue", "ru": "продолжать", "cat": "Общее", "icon": "forward"}, {"en": "final version", "ru": "финальная версия", "cat": "Работа", "icon": "final"}, {"en": "reference", "ru": "референс", "cat": "Работа", "icon": "reference"}], "phrase": "My next goal is...", "gpt": true}];
-const STICKERS={"handshake": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">🤝</text>\n    </svg>", "spark": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">✦</text>\n    </svg>", "timeline": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">▤</text>\n    </svg>", "film": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">🎞</text>\n    </svg>", "heart": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">♡</text>\n    </svg>", "swap": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">⇄</text>\n    </svg>", "transition": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">➜</text>\n    </svg>", "scissors": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">✂</text>\n    </svg>", "check": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">✓</text>\n    </svg>", "cloud": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">☁</text>\n    </svg>", "calendar": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">▦</text>\n    </svg>", "edit": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">✎</text>\n    </svg>", "question": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">?</text>\n    </svg>", "target": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">◎</text>\n    </svg>", "chat": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">◌</text>\n    </svg>", "document": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">▤</text>\n    </svg>", "bulb": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">☼</text>\n    </svg>", "bolt": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">ϟ</text>\n    </svg>", "speed": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">»</text>\n    </svg>", "sequence": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">▥</text>\n    </svg>", "badge": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">★</text>\n    </svg>", "arrowup": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">↗</text>\n    </svg>", "diamond": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">◇</text>\n    </svg>", "mask": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">◐</text>\n    </svg>", "eye": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">◉</text>\n    </svg>", "ruler": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">⌁</text>\n    </svg>", "progress": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">◔</text>\n    </svg>", "export": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">⇧</text>\n    </svg>", "idea": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">✦</text>\n    </svg>", "compare": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">⇆</text>\n    </svg>", "contrast": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">◒</text>\n    </svg>", "droplet": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">●</text>\n    </svg>", "warning": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">!</text>\n    </svg>", "puzzle": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">✣</text>\n    </svg>", "audio": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">≋</text>\n    </svg>", "noise": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">≈</text>\n    </svg>", "megaphone": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">▷</text>\n    </svg>", "pin": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">⌖</text>\n    </svg>", "hook": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">J</text>\n    </svg>", "likes": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">♡</text>\n    </svg>", "feather": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">⌁</text>\n    </svg>", "motion": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">»</text>\n    </svg>", "palette": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">◑</text>\n    </svg>", "balance": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">⚖</text>\n    </svg>", "thumb": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">✓</text>\n    </svg>", "clock": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">◷</text>\n    </svg>", "package": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">□</text>\n    </svg>", "list": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">☷</text>\n    </svg>", "context": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">⋯</text>\n    </svg>", "emotion": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">☺</text>\n    </svg>", "camera": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">▣</text>\n    </svg>", "zoomface": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">◉</text>\n    </svg>", "speech": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">◌</text>\n    </svg>", "forward": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">→</text>\n    </svg>", "final": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">✓</text>\n    </svg>", "reference": "<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\">\n    <path d=\"M18 28 Q60 4 102 28 L97 92 Q60 114 23 92 Z\" fill=\"#fff\" stroke=\"#22262f\" stroke-width=\"3\"/>\n    <text x=\"60\" y=\"73\" text-anchor=\"middle\" font-size=\"46\" font-family=\"Arial, sans-serif\" fill=\"#22262f\">▤</text>\n    </svg>"};
-let currentDay=1,lessonStep=0,quiz=[],quizIndex=0,score=0;
-const allWords=DAYS.flatMap((d,di)=>d.words.map(w=>({...w,day:di+1})));
-const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-const key=(n)=>'tanya-v6-'+n;
-const getArr=(n)=>JSON.parse(localStorage.getItem(key(n))||'[]');
-const setArr=(n,v)=>localStorage.setItem(key(n),JSON.stringify(v));
-function doneDays(){return DAYS.filter((_,i)=>localStorage.getItem(key('done-'+(i+1)))==='1').length}
-function currentIncomplete(){return Math.min((DAYS.findIndex((_,i)=>localStorage.getItem(key('done-'+(i+1)))!=='1')+1)||14,14)}
-function openView(v){$$('.view').forEach(x=>x.classList.remove('active'));$$('[data-view]').forEach(x=>x.classList.toggle('active',x.dataset.view===v));$('#'+v).classList.add('active');}
-$$('[data-view]').forEach(b=>b.onclick=()=>openView(b.dataset.view));
-function renderToday(){currentDay=currentIncomplete();const d=DAYS[currentDay-1];$('#todayTitle').textContent='День '+currentDay;$('#progressSub').textContent='День '+currentDay+' из 14';$('#todayWords').innerHTML=d.words.map(w=>`<span class="chip">${w.en}</span>`).join('');$('#gptBtn').disabled=!d.gpt;$('#gptBtn').textContent=d.gpt?'Начать разговор':'Сегодня без практики';updateStats()}
-function updateStats(){const done=doneDays(),pct=Math.round(done/14*100),rev=getUnknown(),fav=getArr('favorites');$('#progressPct').textContent=pct+'%';$('#progressBar').style.width=pct+'%';$('#statDays').textContent=done;$('#statWords').textContent=done*4;$('#statReview').textContent=rev.length;$('#reviewBadge').textContent=rev.length?rev.length:'';$('#streakCount').textContent=Math.max(1,done)+' '+(done===1?'день':'дней');renderCourse();renderReview();renderFavorites();renderAchievements()}
-function renderCourse(){$('#courseGrid').innerHTML=DAYS.map((d,i)=>`<div class="panel course-card ${localStorage.getItem(key('done-'+(i+1)))==='1'?'done':''}" onclick="openDay(${i+1})"><span class="tag">День ${i+1}</span><h3>${d.title}</h3><p style="color:var(--muted)">4 слова · разные задания · GPT${d.gpt?' · GPT':''}</p></div>`).join('')}
-function renderDictionary(q=''){const list=allWords.filter(w=>(w.en+' '+w.ru).toLowerCase().includes(q.toLowerCase()));$('#dictionaryGrid').innerHTML=list.map(wordRow).join('')}
-function wordRow(w){const fav=getArr('favorites').some(x=>x.en===w.en);return `<div class="wordrow"><div class="mini">${artFor(w)}</div><div><b>${w.en}</b><div style="color:var(--muted)">${w.ru}</div></div><button class="heart" onclick='toggleFavorite(${JSON.stringify(w)})'>${fav?'★':'☆'}</button></div>`}
-$('#search').oninput=e=>renderDictionary(e.target.value);
-function toggleFavorite(w){let a=getArr('favorites');a=a.some(x=>x.en===w.en)?a.filter(x=>x.en!==w.en):[...a,w];setArr('favorites',a);renderDictionary($('#search').value);renderFavorites()}
-function renderReview(){
- const a=getUnknown();
- $('#reviewGrid').innerHTML=a.length?a.map(w=>`<div class="wordrow unknown-card"><div class="mini">${artFor(w)}</div><div><b>${w.en}</b><div style="color:var(--muted)">${w.ru}</div></div><span class="unknown-count">Не знаю: ${w.unknownCount||1}</span><button class="heart" onclick='removeUnknown(${JSON.stringify(w.en)})'>×</button></div>`).join(''):'<div class="empty">Здесь пока нет слов 🎉</div>'
-}
-function renderFavorites(){const a=getArr('favorites');$('#favoriteGrid').innerHTML=a.length?a.map(wordRow).join(''):'<div class="empty">Добавляй слова звёздочкой ☆</div>'}
-function renderAchievements(){const done=doneDays(),fav=getArr('favorites').length,rev=getArr('review').length;const items=[['Первый шаг','Пройти 1 день',done>=1],['Неделя','Пройти 7 дней',done>=7],['Финиш','Пройти 14 дней',done>=14],['Коллекционер','Добавить 5 любимых слов',fav>=5],['Без страха','Добавить слово в повторение',rev>=1]];$('#achievementsGrid').innerHTML=items.map(x=>`<div class="panel course-card"><span class="tag">${x[2]?'Получено ✓':'В процессе'}</span><h3>${x[0]}</h3><p style="color:var(--muted)">${x[1]}</p></div>`).join('')}
-function startLesson(){openDay(currentDay)}
-function openDay(day){currentDay=day;lessonStep=0;$('#lessonOverlay').classList.add('open');localStorage.setItem(key('last-day'),String(day));renderLessonStep()}
-function closeLesson(){$('#lessonOverlay').classList.remove('open');renderToday();renderResumeBanner()}
-function bars(total,idx){return Array.from({length:total},(_,i)=>`<span class="${i<idx?'done':i===idx?'active':''}"></span>`).join('')}
-function renderLessonStep(){const d=DAYS[currentDay-1],total=7;$('#stepBars').innerHTML=bars(total,lessonStep);$('#stepLabel').textContent=(lessonStep+1)+' из '+total;if(lessonStep<4)renderWord(d.words[lessonStep]);else if(lessonStep===4)renderPhrase(d);else if(lessonStep===5)startQuizUI(d);else renderFinish(d)}
-function renderWord(w){$('#lessonContent').innerHTML=`<div class="word-card"><div><span class="category">${w.cat}</span><div class="big-sticker">${artFor(w)}</div><div class="word-en">${w.en} <button class="round" onclick='speak(${JSON.stringify(w.en)})'>🔊</button></div><div class="word-ru">${w.ru}</div></div><div class="lesson-actions"><button class="btn unknown" onclick='markWord(${JSON.stringify(w)},false)'>Не знаю</button><button class="btn dark" onclick='markWord(${JSON.stringify(w)},true)'>Я знаю ✓</button><button class="btn" onclick='toggleFavorite(${JSON.stringify(w)})'>☆</button></div></div>`}
-function speak(t){const u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=.82;speechSynthesis.cancel();speechSynthesis.speak(u)}
-function markWord(w,known){if(!known){addUnknownWord(w)}lessonStep++;renderLessonStep()}
-function renderPhrase(d){$('#lessonContent').innerHTML=`<div class="word-card"><div><span class="category">Фраза дня</span><div class="big-sticker">${STICKERS.spark}</div><div class="phrase-box">${d.phrase}</div></div><button class="btn dark" onclick="nextPhrase()">Перейти к тесту →</button></div>`}
-function nextPhrase(){startRichPractice(DAYS[currentDay-1])}
-function buildQuiz(d){const pool=allWords;const q=d.words.map(w=>{const wrong=pool.filter(x=>x.en!==w.en).sort(()=>Math.random()-.5).slice(0,3).map(x=>x.ru);return {w,answer:w.ru,opts:[w.ru,...wrong].sort(()=>Math.random()-.5)}});q.push({w:{en:d.phrase,ru:'Фраза дня',icon:'spark'},answer:'Это фраза дня',opts:['Это фраза дня','Название эффекта','Команда экспорта','Формат видео']});return q.sort(()=>Math.random()-.5)}
-function startQuizUI(d){quiz=buildQuiz(d);quizIndex=0;score=0;renderQuestion()}
-function renderQuestion(){const q=quiz[quizIndex];$('#lessonContent').innerHTML=`<div class="word-card"><div><span class="category">Вопрос ${quizIndex+1} из 5</span><div class="big-sticker">${artFor(q.w)}</div><h2>Что означает “${q.w.en}”?</h2><div id="opts">${q.opts.map(o=>`<button class="quiz-option" onclick='answer(${JSON.stringify(o)})'>${o}</button>`).join('')}<button class="quiz-option" onclick="answer('__unknown__')">Не знаю 🤔</button></div><div id="answerNote"></div></div></div>`}
-function answer(a){const q=quiz[quizIndex];$$('.quiz-option').forEach(b=>{b.disabled=true;if(b.textContent===q.answer)b.classList.add('correct');if(a!=='__unknown__'&&b.textContent===a&&a!==q.answer)b.classList.add('wrong')});if(a===q.answer)score++;else if(q.w.ru!=='Фраза дня'){let r=getArr('review');if(!r.some(x=>x.en===q.w.en)){r.push(q.w);setArr('review',r)}}$('#answerNote').innerHTML=`<p><b>${a===q.answer?'Правильно ✓':'Правильный ответ: '+q.answer}</b></p><button class="btn dark" onclick="nextQuestion()">Далее →</button>`}
-function nextQuestion(){quizIndex++;if(quizIndex<quiz.length)renderQuestion();else{lessonStep++;renderLessonStep()}}
-function renderFinish(d){localStorage.setItem(key('done-'+currentDay),'1');updateStats();$('#lessonContent').innerHTML=`<div class="word-card"><div><div class="big-sticker">${artFor({en:"success",icon:"final"})}</div><h2>День завершён</h2><p style="color:var(--muted)">4 слова, фраза и тест готовы.</p><p><b>Результат теста: ${score} из 5</b></p></div><div>${d.gpt?'<button class="btn" onclick="copyGPT()">Практика с GPT</button>':''}<button class="btn dark" onclick="closeLesson()">Вернуться на главную</button></div></div>`}
-function copyGPT(){const text=`Давай практиковать английский. День ${currentDay}. Не исправляй меня сразу. В конце оцени мой ответ и выпиши слова, которых мне не хватило.`;navigator.clipboard?.writeText(text);alert('Фраза для начала разговора скопирована')}
+const DAYS=[{"day": 1, "words": [["actually", "на самом деле"], ["probably", "вероятно"], ["especially", "особенно"], ["however", "однако"], ["timeline", "таймлайн"], ["footage", "исходный материал"], ["sequence", "последовательность кадров"], ["transition", "переход"]], "example": "I actually prefer this version.", "gpt": false}, {"day": 2, "words": [["instead", "вместо этого"], ["although", "хотя"], ["improve", "улучшать"], ["achieve", "достигать"], ["overlay", "наложение"], ["caption", "подпись"], ["subtitle", "субтитр"], ["voice-over", "закадровый голос"]], "example": "The footage needs a smoother transition.", "gpt": false}, {"day": 3, "words": [["suggest", "предлагать"], ["explain", "объяснять"], ["compare", "сравнивать"], ["realize", "осознавать"], ["frame", "кадр"], ["trim", "обрезать"], ["split", "разделить"], ["merge", "объединить"]], "example": "The deadline is quite tight.", "gpt": true}, {"day": 4, "words": [["manage", "справляться"], ["consider", "рассматривать"], ["confident", "уверенный"], ["comfortable", "комфортный"], ["crop", "кадрировать"], ["resize", "изменить размер"], ["zoom", "масштабировать"], ["stabilize", "стабилизировать"]], "example": "Could you clarify this revision?", "gpt": false}, {"day": 5, "words": [["opportunity", "возможность"], ["experience", "опыт"], ["available", "доступный"], ["possible", "возможный"], ["keyframe", "ключевой кадр"], ["masking", "маскирование"], ["motion graphics", "моушн-графика"], ["render", "рендерить"]], "example": "This approach is more effective.", "gpt": false}, {"day": 6, "words": [["challenge", "сложность"], ["effective", "эффективный"], ["appropriate", "подходящий"], ["specific", "конкретный"], ["export", "экспортировать"], ["bitrate", "битрейт"], ["frame rate", "частота кадров"], ["aspect ratio", "соотношение сторон"]], "example": "I feel more confident now.", "gpt": true}, {"day": 7, "words": [["recommend", "рекомендовать"], ["avoid", "избегать"], ["develop", "развивать"], ["independent", "самостоятельный"], ["color grading", "стилистическая цветокоррекция"], ["color correction", "техническая цветокоррекция"], ["exposure", "экспозиция"], ["saturation", "насыщенность"]], "example": "I need to review these words.", "gpt": false}, {"day": 8, "words": [["eventually", "в конце концов"], ["recently", "недавно"], ["meanwhile", "тем временем"], ["definitely", "определённо"], ["contrast", "контраст"], ["highlights", "светлые участки"], ["shadows", "тени"], ["white balance", "баланс белого"]], "example": "I would recommend another option.", "gpt": false}, {"day": 9, "words": [["perhaps", "возможно"], ["despite", "несмотря на"], ["unless", "если не"], ["reliable", "надёжный"], ["background music", "фоновая музыка"], ["sound effects", "звуковые эффекты"], ["audio levels", "уровни звука"], ["noise reduction", "шумоподавление"]], "example": "There is an issue with the export.", "gpt": true}, {"day": 10, "words": [["flexible", "гибкий"], ["reasonable", "разумный"], ["accurate", "точный"], ["notice", "замечать"], ["fade in", "плавное появление"], ["fade out", "плавное затухание"], ["mute", "отключить звук"], ["hook", "зацепка в начале"]], "example": "The hook should attract attention.", "gpt": false}, {"day": 11, "words": [["mention", "упоминать"], ["admit", "признавать"], ["expect", "ожидать"], ["require", "требовать"], ["retention", "удержание аудитории"], ["engagement", "вовлечённость"], ["thumbnail", "обложка"], ["algorithm", "алгоритм"]], "example": "The color grading looks more subtle.", "gpt": false}, {"day": 12, "words": [["involve", "включать в себя"], ["depend", "зависеть"], ["prefer", "предпочитать"], ["respond", "отвечать"], ["viral", "вирусный"], ["trending", "трендовый"], ["reach", "охват"], ["watch time", "время просмотра"]], "example": "Please confirm the final deadline.", "gpt": true}, {"day": 13, "words": [["continue", "продолжать"], ["decision", "решение"], ["result", "результат"], ["purpose", "цель"], ["revision", "правка"], ["feedback", "обратная связь"], ["deadline", "срок сдачи"], ["draft", "черновик"]], "example": "The ending creates a stronger emotion.", "gpt": false}, {"day": 14, "words": [["progress", "прогресс"], ["support", "поддерживать"], ["solution", "решение"], ["issue", "проблема"], ["final version", "финальная версия"], ["deliverables", "результаты работы"], ["requirements", "требования"], ["reference", "референс"]], "example": "My next goal is to speak more fluently.", "gpt": true}];
+let currentDay=parseInt(localStorage.getItem('tanya-v5-current-day')||'1');
+let wordIndex=0, stage='learn', answers={}, spellAnswers={};
+const lesson=document.getElementById('lesson');
+const allWords=DAYS.flatMap(d=>d.words);
 
-
-const ART_COLORS=['color-blue','color-yellow','color-coral','color-green','color-purple','color-cyan','color-pink'];
-function artFor(w){
- const icon=EMOJI_MAP[w.en]||'✨';
- let sum=0;for(const ch of w.en)sum+=ch.charCodeAt(0);
- const cls=ART_COLORS[sum%ART_COLORS.length];
- return `<div class="color-art ${cls}"><div class="symbol">${icon}</div><div class="mini-lines"><i></i><i></i><i></i></div></div>`;
+function dayData(){return DAYS[currentDay-1]}
+function setCourseProgress(){
+ document.getElementById('dayTitle').textContent=`День ${currentDay} из 14`;
+ let completed=currentDay-1;
+ document.getElementById('courseCount').textContent=`${completed}/14`;
+ document.getElementById('courseBar').style.width=(completed/14*100)+'%';
 }
-function getUnknown(){return JSON.parse(localStorage.getItem(key('unknown'))||'[]')}
-function setUnknown(v){localStorage.setItem(key('unknown'),JSON.stringify(v));renderReview();updateStats()}
-function addUnknownWord(w){
- let a=getUnknown(),item=a.find(x=>x.en===w.en);
- if(item)item.unknownCount=(item.unknownCount||1)+1;
- else a.push({...w,unknownCount:1});
- setUnknown(a);
+function normalize(s){return String(s).toLowerCase().trim().replace(/[.!?,]/g,'').replace(/\s+/g,' ')}
+function render(){
+ setCourseProgress();
+ if(currentDay>14){
+  lesson.innerHTML=`<section class="card success"><h2>Курс завершён 🎉</h2><p>Ты правильно прошла все 14 уроков.</p></section>`;return;
+ }
+ const d=dayData();
+ if(stage==='learn'){
+  const w=d.words[wordIndex];
+  lesson.innerHTML=`<section class="card word-card"><div class="counter">Слово ${wordIndex+1} из 8</div><div class="word-en">${w[0]}</div><div class="word-ru">${w[1]}</div><button class="main" onclick="nextWord()">Понятно, дальше</button></section>`;
+ } else if(stage==='choice'){
+  const qs=d.words.map((w,i)=>{
+   const others=allWords.filter(x=>x[0]!==w[0]).sort(()=>Math.random()-.5).slice(0,3).map(x=>x[1]);
+   const options=[w[1],...others].sort(()=>Math.random()-.5);
+   return {word:w[0],answer:w[1],options};
+  });
+  window.choiceQuestions=qs;
+  lesson.innerHTML=`<section class="card"><h2>Шаг 2. Выбери перевод</h2><p class="muted">Все 8 ответов должны быть правильными.</p>${qs.map((q,i)=>`<div class="question" data-i="${i}"><b>${i+1}. Что значит “${q.word}”?</b><div class="options">${q.options.map(o=>`<button class="opt" onclick='selectChoice(${i},${JSON.stringify(o)})'>${o}</button>`).join('')}</div></div>`).join('')}<button class="main" onclick="checkChoices()">Проверить</button><div class="feedback" id="choiceFeedback"></div></section>`;
+ } else if(stage==='spell'){
+  lesson.innerHTML=`<section class="card"><h2>Шаг 3. Напиши слова</h2><p class="muted">Напиши английское слово по переводу. Ошибочные поля нужно исправить.</p>${d.words.map((w,i)=>`<div class="question"><b>${i+1}. ${w[1]}</b><input type="text" id="spell${i}" value="${spellAnswers[i]||''}" placeholder="English word"><div class="feedback" id="spellFeedback${i}"></div></div>`).join('')}<button class="main" onclick="checkSpelling()">Проверить написание</button><div class="feedback" id="spellSummary"></div></section>`;
+ } else if(stage==='sentence'){
+  lesson.innerHTML=`<section class="card"><h2>Шаг 4. Заполни пропуск</h2><p class="muted">Впиши пропущенное слово точно.</p><div class="question"><b>${d.example.replace(d.words[0][0],'_____')}</b><input type="text" id="sentenceInput" placeholder="Пропущенное слово"><div class="feedback" id="sentenceFeedback"></div></div><button class="main" onclick="checkSentence()">Проверить</button></section>`;
+ } else if(stage==='gpt' && d.gpt){
+  lesson.innerHTML=`<section class="card gpt"><h2>Практика с GPT</h2><p>Поговори 5–10 минут. После разговора нажми «Практика завершена».</p><p><b>Фраза для начала:</b><br>Давай практиковать английский. День ${currentDay}. Не исправляй меня сразу, а в конце назови слова, которых мне не хватало.</p><button class="main" onclick="finishDay()">Практика завершена</button></section>`;
+ } else {
+  finishDay();
+ }
 }
-function removeUnknown(en){setUnknown(getUnknown().filter(x=>x.en!==en))}
-function saveSession(){
- const payload={currentDay,exerciseSet,exerciseIndex,exerciseScore,lessonOpen:$('#lessonOverlay').classList.contains('open'),savedAt:Date.now()};
- localStorage.setItem(key('session'),JSON.stringify(payload));
- renderResumeBanner();
+function nextWord(){
+ if(wordIndex<7){wordIndex++;render()}else{stage='choice';answers={};render()}
 }
-function clearSession(){localStorage.removeItem(key('session'));renderResumeBanner()}
-function getSession(){try{return JSON.parse(localStorage.getItem(key('session'))||'null')}catch{return null}}
-function renderResumeBanner(){
- const s=getSession(),b=$('#resumeBanner');
- if(s&&s.exerciseSet&&s.exerciseSet.length&&s.exerciseIndex<s.exerciseSet.length){
-   b.classList.add('show');
-   $('#resumeText').textContent=`День ${s.currentDay}, задание ${s.exerciseIndex+1} из ${s.exerciseSet.length}`;
- }else b.classList.remove('show');
+function selectChoice(i,o){
+ answers[i]=o;
+ const q=document.querySelector(`.question[data-i="${i}"]`);
+ q.querySelectorAll('.opt').forEach(b=>b.classList.toggle('selected',b.textContent===o));
 }
-function resumeLesson(){
- const s=getSession();if(!s)return;
- currentDay=s.currentDay;exerciseSet=s.exerciseSet;exerciseIndex=s.exerciseIndex;exerciseScore=s.exerciseScore||0;
- $('#lessonOverlay').classList.add('open');renderExercise();
-}
-
-const EMOJI_MAP={
- reliable:'🤝', actually:'💡', timeline:'🎞️', footage:'🎬', prefer:'❤️', instead:'🔄',
- transition:'➡️', trim:'✂️', manage:'✅', probably:'🤔', deadline:'📅', revision:'✏️',
- clarify:'❓', specific:'🎯', feedback:'💬', draft:'📄', reason:'💡', effective:'⚡',
- pacing:'⏱️', sequence:'🎞️', experience:'🏅', improve:'📈', keyframe:'◇', masking:'🎭',
- recognize:'👁️', accurate:'📏', render:'⏳', export:'📤', suggest:'💡', compare:'⚖️',
- contrast:'◐', saturation:'🎨', issue:'⚠️', solution:'🧩', 'audio levels':'🔊',
- 'noise reduction':'🔇', attention:'📣', relevant:'📌', hook:'🪝', engagement:'❤️',
- subtle:'🪶', dynamic:'⚡', 'color grading':'🎨', 'white balance':'⚪',
- reasonable:'👍', available:'🕒', deliverables:'📦', requirements:'📋',
- context:'🧠', emotion:'😊', 'b-roll':'📹', 'close-up':'🔍', express:'💬',
- continue:'➡️', 'final version':'✅', reference:'🖼️'
-};
-const EXAMPLE_MAP={
- reliable:'She is a reliable editor.', actually:'Actually, I prefer this version.',
- timeline:'The clip is on the timeline.', footage:'I need to review the footage.',
- prefer:'I prefer short videos.', instead:'Let us use this shot instead.',
- transition:'I added a smooth transition.', trim:'Please trim this clip.',
- manage:'I can manage two projects.', probably:'I will probably finish tonight.',
- deadline:'The deadline is next Friday.', revision:'The client asked for a revision.',
- clarify:'Could you clarify this part?', specific:'Could you be more specific?',
- feedback:'Thanks for the feedback.', draft:'I will send the draft today.',
- reason:'The main reason is the pacing.', effective:'This version is more effective.',
- pacing:'The pacing feels too slow.', sequence:'This sequence needs more energy.',
- experience:'I have experience with reels.', improve:'I want to improve my English.',
- keyframe:'Add a keyframe here.', masking:'Masking can hide this area.',
- recognize:'I recognize this word.', accurate:'This answer is more accurate.',
- render:'The video is rendering now.', export:'Export the final version.',
- suggest:'I suggest changing the music.', compare:'Let us compare both versions.',
- contrast:'The contrast is too strong.', saturation:'Reduce the saturation slightly.',
- issue:'There is an issue with the audio.', solution:'I found a simple solution.',
- 'audio levels':'The audio levels are too high.', 'noise reduction':'Use noise reduction here.',
- attention:'The first seconds grab attention.', relevant:'The topic is relevant.',
- hook:'The hook needs to be stronger.', engagement:'This reel has strong engagement.',
- subtle:'The transition should be subtle.', dynamic:'The edit feels dynamic.',
- 'color grading':'The color grading feels cinematic.', 'white balance':'Adjust the white balance.',
- reasonable:'That sounds reasonable.', available:'I am available on Thursday.',
- deliverables:'The deliverables are ready.', requirements:'Let us review the requirements.',
- context:'The audience needs more context.', emotion:'This scene creates emotion.',
- 'b-roll':'Add some b-roll here.', 'close-up':'Use a close-up for this moment.',
- express:'I can express my ideas clearly.', continue:'I want to continue practicing.',
- 'final version':'The final version is ready.', reference:'Please send me a reference.'
-};
-const WORD_STATUS_ORDER=['Новое','Видела','Учишь','Запомнила','Использовала'];
-function getWordStatus(en){return localStorage.getItem(key('status-'+en))||'Новое'}
-function setWordStatus(en,status){localStorage.setItem(key('status-'+en),status)}
-function bumpWordStatus(en){
- const cur=getWordStatus(en),i=WORD_STATUS_ORDER.indexOf(cur);
- setWordStatus(en,WORD_STATUS_ORDER[Math.min(i+1,WORD_STATUS_ORDER.length-1)]);
-}
-function addReviewWord(w){
- let r=getArr('review');
- if(!r.some(x=>x.en===w.en)){r.push(w);setArr('review',r)}
-}
-function normalizeText(t){return (t||'').toLowerCase().trim().replace(/[.!?,]/g,'').replace(/\s+/g,' ')}
-function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
-function makeExerciseSet(d){
- const set=[];
- d.words.forEach(w=>{
-   set.push({type:'translate',w});
-   set.push({type:'reverse',w});
-   set.push({type:'type',w});
-   set.push({type:'emoji',w});
-   set.push({type:'letters',w});
-   set.push({type:'blank',w});
-   set.push({type:'speak',w});
+function checkChoices(){
+ let allCorrect=true;
+ choiceQuestions.forEach((q,i)=>{
+  const chosen=answers[i], node=document.querySelector(`.question[data-i="${i}"]`);
+  node.querySelectorAll('.opt').forEach(b=>{b.classList.remove('correct','wrong');if(b.textContent===q.answer)b.classList.add('correct');if(chosen===b.textContent&&chosen!==q.answer)b.classList.add('wrong')});
+  if(chosen!==q.answer) allCorrect=false;
  });
- return shuffle(set).slice(0,12);
+ const f=document.getElementById('choiceFeedback');
+ if(allCorrect){f.textContent='Все правильно ✓';f.style.color='var(--ok)';setTimeout(()=>{stage='spell';render()},600)}
+ else{f.textContent='Есть ошибки. Исправь их — без этого дальше нельзя.';f.style.color='var(--bad)'}
 }
-let exerciseSet=[],exerciseIndex=0,exerciseScore=0,exerciseAnswer='',letterAnswer='';
-function renderStatus(w){
- return `<div class="status-row">${WORD_STATUS_ORDER.map(s=>`<span class="status-pill ${getWordStatus(w.en)===s?'active':''}">${s}</span>`).join('')}</div>`;
+function checkSpelling(){
+ const d=dayData();let allCorrect=true;
+ d.words.forEach((w,i)=>{
+  const input=document.getElementById('spell'+i);spellAnswers[i]=input.value;
+  const ok=normalize(input.value)===normalize(w[0]);
+  const f=document.getElementById('spellFeedback'+i);
+  f.textContent=ok?'Правильно ✓':'Неправильно. Попробуй ещё раз.';
+  f.style.color=ok?'var(--ok)':'var(--bad)';
+  input.style.borderColor=ok?'var(--ok)':'var(--bad)';
+  if(!ok) allCorrect=false;
+ });
+ const s=document.getElementById('spellSummary');
+ if(allCorrect){s.textContent='Все слова написаны правильно ✓';s.style.color='var(--ok)';setTimeout(()=>{stage='sentence';render()},700)}
+ else{s.textContent='Урок не завершён: исправь все слова.';s.style.color='var(--bad)'}
 }
-function startRichPractice(d){
- exerciseSet=makeExerciseSet(d);exerciseIndex=0;exerciseScore=0;saveSession();renderExercise();
-}
-function renderExercise(){
- const ex=exerciseSet[exerciseIndex],w=ex.w,all=allWords;
- $('#stepBars').innerHTML=bars(exerciseSet.length,exerciseIndex);
- $('#stepLabel').textContent=(exerciseIndex+1)+' из '+exerciseSet.length;
- let body='';
- if(ex.type==='translate'){
-  const opts=shuffle([w.ru,...shuffle(all.filter(x=>x.en!==w.en)).slice(0,3).map(x=>x.ru)]);
-  body=`<div class="exercise-title">Выбери перевод</div><div class="exercise-prompt">${w.en}</div>${renderStatus(w)}<div class="options">${opts.map(o=>`<button class="quiz-option" onclick='submitExercise(${JSON.stringify(o)})'>${o}</button>`).join('')}<button class="quiz-option" onclick="submitExercise('__unknown__')">Не знаю 🤔</button></div>`;
- }
- if(ex.type==='reverse'){
-  const opts=shuffle([w.en,...shuffle(all.filter(x=>x.en!==w.en)).slice(0,3).map(x=>x.en)]);
-  body=`<div class="exercise-title">Выбери английское слово</div><div class="exercise-prompt">${w.ru}</div>${renderStatus(w)}<div class="options">${opts.map(o=>`<button class="quiz-option" onclick='submitExercise(${JSON.stringify(o)})'>${o}</button>`).join('')}<button class="quiz-option" onclick="submitExercise('__unknown__')">Не знаю 🤔</button></div>`;
- }
- if(ex.type==='type'){
-  body=`<div class="exercise-title">Напиши по-английски</div><div class="exercise-prompt">${w.ru}</div>${renderStatus(w)}<input class="type-input" id="typeAnswer" placeholder="Напиши слово"><button class="btn dark" onclick="submitExercise($('#typeAnswer').value)">Проверить</button><button class="btn unknown" onclick="submitExercise('__unknown__')">Не знаю</button>`;
- }
- if(ex.type==='emoji'){
-  const correct=EMOJI_MAP[w.en]||'💡';
-  const pool=shuffle(['🎬','✂️','📅','💬','🤝','🎨','🔊','📤','⚡','🧩'].filter(x=>x!==correct)).slice(0,3);
-  const opts=shuffle([correct,...pool]);
-  body=`<div class="exercise-title">Выбери ассоциацию</div><div class="exercise-prompt">${w.en}</div>${renderStatus(w)}<div class="emoji-grid">${opts.map(o=>`<button class="emoji-btn" onclick='submitExercise(${JSON.stringify(o)})'>${o}</button>`).join('')}</div><button class="btn unknown" onclick="submitExercise('__unknown__')">Не знаю</button>`;
- }
- if(ex.type==='letters'){
-  const chunks=w.en.includes(' ')?w.en.split(' '):w.en.match(/.{1,2}/g);
-  const opts=shuffle(chunks);
-  letterAnswer='';
-  body=`<div class="exercise-title">Собери слово</div><div class="exercise-prompt">${w.ru}</div>${renderStatus(w)}<div class="answer-line" id="letterAnswer"></div><div class="letters">${opts.map((o,i)=>`<button class="letter-chip" id="lc${i}" onclick='addChunk(${JSON.stringify(o)},${i})'>${o}</button>`).join('')}</div><button class="btn dark" onclick="submitExercise(letterAnswer)">Проверить</button>`;
- }
- if(ex.type==='blank'){
-  const sentence=EXAMPLE_MAP[w.en]||`I use ${w.en}.`;
-  const blank=sentence.replace(new RegExp(w.en.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'i'),'_____');
-  body=`<div class="exercise-title">Вставь пропущенное слово</div><div class="exercise-prompt">${blank}</div>${renderStatus(w)}<input class="type-input" id="typeAnswer" placeholder="${w.ru}"><button class="btn dark" onclick="submitExercise($('#typeAnswer').value)">Проверить</button>`;
- }
- if(ex.type==='speak'){
-  body=`<div class="exercise-title">Произнеси слово</div><div class="exercise-prompt">${w.en}</div>${renderStatus(w)}<button class="mic-btn" id="micBtn" onclick="startSpeechCheck()">🎤</button><div class="exercise-sub" id="speechNote">Нажми и произнеси слово. Если браузер не поддерживает распознавание, оцени себя вручную.</div><div class="lesson-actions"><button class="btn unknown" onclick="submitExercise('__unknown__')">Не получилось</button><button class="btn dark" onclick="submitExercise('${w.en}')">Я произнесла правильно</button></div>`;
- }
- $('#lessonContent').innerHTML=`<div class="exercise-card"><div>${body}<div id="exerciseNote"></div></div></div>`;
-}
-function addChunk(chunk,i){
- letterAnswer+=chunk;
- $('#letterAnswer').textContent=letterAnswer;localStorage.setItem(key('partial-letter'),letterAnswer);
- $('#lc'+i).disabled=true;
-}
-function expectedAnswer(ex){
- if(ex.type==='translate')return ex.w.ru;
- if(ex.type==='reverse')return ex.w.en;
- if(ex.type==='emoji')return EMOJI_MAP[ex.w.en]||'💡';
- return ex.w.en;
-}
-function submitExercise(answer){
- const ex=exerciseSet[exerciseIndex],correct=expectedAnswer(ex);
- const ok=answer!=='__unknown__'&&normalizeText(answer)===normalizeText(correct);
- if(ok){exerciseScore++;bumpWordStatus(ex.w.en)}
- else if(answer==='__unknown__')addUnknownWord(ex.w);
- else addReviewWord(ex.w);
- $('#exerciseNote').innerHTML=`<p><b>${ok?'Правильно ✓':'Правильный ответ: '+correct}</b></p><button class="btn dark" onclick="nextExercise()">Далее →</button>`;
- $$('.quiz-option,.emoji-btn,.letter-chip,.type-input,.mic-btn').forEach(x=>x.disabled=true);saveSession();
-}
-function nextExercise(){
- exerciseIndex++;saveSession();
- if(exerciseIndex<exerciseSet.length)renderExercise();else finishRichPractice();
-}
-function finishRichPractice(){
- const pass=exerciseScore>=Math.ceil(exerciseSet.length*.7);
- if(pass){
-  localStorage.setItem(key('done-'+currentDay),'1');clearSession();
-  updateStats();
-  $('#lessonContent').innerHTML=`<div class="word-card"><div><div class="big-sticker">${artFor({en:"success",icon:"final"})}</div><h2>День завершён</h2><p style="color:var(--muted)">Ты потренировала слова несколькими способами.</p><p><b>Результат: ${exerciseScore} из ${exerciseSet.length}</b></p></div><div><button class="btn dark" onclick="closeLesson()">Вернуться на главную</button></div></div>`;
- }else{
-  $('#lessonContent').innerHTML=`<div class="word-card"><div><div class="big-sticker">${artFor({en:"review",icon:"warning"})}</div><h2>Нужно ещё повторить</h2><p style="color:var(--muted)">Чтобы завершить день, нужно минимум 70% правильных ответов.</p><p><b>Результат: ${exerciseScore} из ${exerciseSet.length}</b></p></div><div><button class="btn" onclick="showReviewView()">Открыть повторение</button><button class="btn dark" onclick="startRichPractice(DAYS[currentDay-1])">Повторить практику</button></div></div>`;
+function checkSentence(){
+ const d=dayData(), expected=d.words[0][0], value=document.getElementById('sentenceInput').value;
+ const f=document.getElementById('sentenceFeedback');
+ if(normalize(value)===normalize(expected)){
+  f.textContent='Правильно ✓';f.style.color='var(--ok)';
+  setTimeout(()=>{stage=d.gpt?'gpt':'finish';render()},600);
+ } else {
+  f.textContent='Неправильно. Урок не завершён — попробуй ещё раз.';f.style.color='var(--bad)';
  }
 }
-function startSpeechCheck(){
- const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
- const btn=$('#micBtn'),note=$('#speechNote');
- if(!SpeechRecognition){note.textContent='Распознавание речи недоступно. Используй кнопку «Я произнесла правильно».';return}
- const ex=exerciseSet[exerciseIndex],r=new SpeechRecognition();
- r.lang='en-US';r.interimResults=false;r.maxAlternatives=3;
- btn.classList.add('listening');note.textContent='Слушаю...';
- r.onresult=e=>{
-   btn.classList.remove('listening');
-   const heard=[...e.results[0]].map(x=>normalizeText(x.transcript));
-   const ok=heard.some(x=>x.includes(normalizeText(ex.w.en)));
-   note.textContent=ok?'Отлично, распознано: '+e.results[0][0].transcript:'Я услышала: '+e.results[0][0].transcript;
-   if(ok)submitExercise(ex.w.en);
- };
- r.onerror=()=>{btn.classList.remove('listening');note.textContent='Не удалось распознать. Попробуй ещё раз или оцени себя вручную.'};
- r.start();
+function finishDay(){
+ localStorage.setItem('tanya-v5-done-'+currentDay,'1');
+ currentDay++;
+ localStorage.setItem('tanya-v5-current-day',String(currentDay));
+ wordIndex=0;stage='learn';answers={};spellAnswers={};render();
 }
-
-renderDictionary();renderToday();renderResumeBanner();
-let deferredPrompt=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e});
+const theme=document.getElementById('theme'),saved=localStorage.getItem('tanya-theme')||'light';
+document.documentElement.dataset.theme=saved;theme.textContent=saved==='dark'?'☀️':'🌙';
+theme.onclick=()=>{let t=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=t;localStorage.setItem('tanya-theme',t);theme.textContent=t==='dark'?'☀️':'🌙'};
 if('serviceWorker'in navigator)navigator.serviceWorker.register('./service-worker.js');
+render();
 </script></body></html>
