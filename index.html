@@ -1,127 +1,423 @@
 <!doctype html>
 <html lang="ru">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#6f56d9"><link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="favicon.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#6f56d9">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <title>English with Tanya</title>
 <style>
-:root{--bg:#f5f3fb;--card:#fff;--text:#241f33;--muted:#756e87;--p:#6f56d9;--soft:#ece7ff;--line:#e5dff0;--ok:#2f9b68;--bad:#c65d5d;--shadow:0 16px 42px #3d2c6a14}
-[data-theme=dark]{--bg:#15121d;--card:#211c2c;--text:#f5f1ff;--muted:#b9afca;--p:#9b84ef;--soft:#332b47;--line:#3a334b;--ok:#5ed39a;--bad:#ff8c8c;--shadow:0 18px 46px #0005}
-*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,sans-serif;background:linear-gradient(#eae4ff,var(--bg) 390px);color:var(--text);min-height:100vh}
-[data-theme=dark] body{background:linear-gradient(#261e3e,var(--bg) 390px)}
-.app{max-width:760px;margin:auto;padding:18px 14px 72px}.hero,.card{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow)}.hero{padding:24px;position:relative}
-.tag{display:inline-block;background:var(--soft);color:var(--p);padding:7px 11px;border-radius:99px;font-weight:900}h1{font-size:clamp(34px,8vw,56px);line-height:1;margin:12px 0}.muted,.hero p{color:var(--muted);line-height:1.5}.theme{position:absolute;right:16px;top:16px;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:12px;width:42px;height:42px}
-.card{padding:20px;margin-top:14px}.progressline{height:12px;background:var(--soft);border-radius:99px;overflow:hidden;margin:10px 0 4px}.bar{height:100%;background:linear-gradient(90deg,var(--p),#bbaaff);width:0}
-.step{display:none}.step.active{display:block}.word-card{text-align:center;padding:36px 18px}.word-en{font-size:38px;font-weight:950}.word-ru{font-size:20px;color:var(--muted);margin-top:8px}.counter{font-weight:900;color:var(--p)}
-button.main{width:100%;border:0;background:var(--p);color:white;padding:14px;border-radius:14px;font-weight:950;font-size:16px;margin-top:14px}button.alt{width:100%;border:1px solid var(--line);background:var(--card);color:var(--text);padding:13px;border-radius:13px;font-weight:850;margin-top:9px}
-.question{padding:16px;border:1px solid var(--line);border-radius:15px;margin:12px 0}.options{display:grid;gap:8px;margin-top:11px}.opt{border:1px solid var(--line);background:var(--card);color:var(--text);padding:12px;border-radius:12px;text-align:left}.opt.selected{outline:2px solid var(--p)}.opt.correct{background:color-mix(in srgb,var(--ok) 18%,var(--card));border-color:var(--ok)}.opt.wrong{background:color-mix(in srgb,var(--bad) 16%,var(--card));border-color:var(--bad)}
-input[type=text]{width:100%;border:1px solid var(--line);background:var(--card);color:var(--text);padding:13px;border-radius:12px;margin-top:9px}.feedback{font-weight:900;margin-top:10px}.locked{opacity:.55;pointer-events:none}.success{text-align:center;padding:32px 18px}.success h2{font-size:32px}.gpt{background:linear-gradient(135deg,#28223b,#6f56d9);color:white}.gpt p{color:#ffffffcf}.hidden{display:none}
+:root {
+  --bg:#f5f3fb; --card:#fff; --text:#241f33; --muted:#756e87;
+  --primary:#6f56d9; --soft:#ece7ff; --line:#e5dff0;
+  --ok:#2f9b68; --bad:#c65d5d; --shadow:0 16px 42px rgba(61,44,106,.09);
+}
+[data-theme="dark"] {
+  --bg:#15121d; --card:#211c2c; --text:#f5f1ff; --muted:#b9afca;
+  --primary:#9b84ef; --soft:#332b47; --line:#3a334b;
+  --ok:#5ed39a; --bad:#ff8c8c; --shadow:0 18px 46px rgba(0,0,0,.32);
+}
+* { box-sizing:border-box; }
+body {
+  margin:0; font-family:Inter,system-ui,-apple-system,sans-serif;
+  background:linear-gradient(#eae4ff,var(--bg) 390px); color:var(--text);
+  min-height:100vh;
+}
+[data-theme="dark"] body { background:linear-gradient(#261e3e,var(--bg) 390px); }
+.app { max-width:720px; margin:auto; padding:18px 14px 72px; }
+.hero,.card {
+  background:var(--card); border:1px solid var(--line);
+  border-radius:24px; box-shadow:var(--shadow);
+}
+.hero { padding:24px; position:relative; }
+.tag {
+  display:inline-block; background:var(--soft); color:var(--primary);
+  padding:7px 11px; border-radius:99px; font-weight:900;
+}
+h1 { font-size:clamp(34px,8vw,56px); line-height:1; margin:12px 0; }
+h2 { margin:0 0 8px; }
+p,.muted { color:var(--muted); line-height:1.5; }
+.theme {
+  position:absolute; right:16px; top:16px; width:42px; height:42px;
+  border:1px solid var(--line); background:var(--card); color:var(--text);
+  border-radius:12px; cursor:pointer;
+}
+.card { padding:20px; margin-top:14px; }
+.progress {
+  height:12px; background:var(--soft); border-radius:99px;
+  overflow:hidden; margin-top:10px;
+}
+.progress > div {
+  height:100%; background:linear-gradient(90deg,var(--primary),#bbaaff);
+  transition:width .3s ease;
+}
+.word-number {
+  color:var(--primary); font-weight:950; text-transform:uppercase;
+  letter-spacing:.07em; font-size:12px;
+}
+.word-main {
+  text-align:center; padding:30px 10px;
+}
+.word-en { font-size:42px; font-weight:950; }
+.word-ru { font-size:21px; color:var(--muted); margin-top:8px; }
+button.primary,button.secondary,button.option {
+  width:100%; padding:14px; border-radius:14px; font-weight:900;
+  cursor:pointer; font-size:16px;
+}
+button.primary {
+  border:0; background:var(--primary); color:white; margin-top:14px;
+}
+button.secondary {
+  border:1px solid var(--line); background:var(--card); color:var(--text);
+  margin-top:10px;
+}
+button.option {
+  text-align:left; border:1px solid var(--line);
+  background:var(--card); color:var(--text); margin-top:8px;
+}
+button.option.selected { outline:2px solid var(--primary); }
+button.option.correct {
+  background:color-mix(in srgb,var(--ok) 18%,var(--card)); border-color:var(--ok);
+}
+button.option.wrong {
+  background:color-mix(in srgb,var(--bad) 16%,var(--card)); border-color:var(--bad);
+}
+input[type="text"], textarea {
+  width:100%; border:1px solid var(--line); background:var(--card);
+  color:var(--text); border-radius:13px; padding:14px; font-size:16px;
+  margin-top:10px;
+}
+textarea { min-height:110px; resize:vertical; }
+.feedback { margin-top:10px; font-weight:900; min-height:24px; }
+.success { text-align:center; padding:34px 18px; }
+.success h2 { font-size:34px; }
+.gpt {
+  background:linear-gradient(135deg,#28223b,#6f56d9); color:white;
+}
+.gpt p { color:rgba(255,255,255,.82); }
+.badge-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+.badge {
+  background:var(--soft); padding:8px 11px; border-radius:99px; font-weight:850;
+}
 </style>
 </head>
-<body><main class="app">
-<section class="hero"><span class="tag">Логичный курс · 14 дней</span><h1>English with Tanya</h1><p>Один урок за раз. День завершается только после всех правильных ответов.</p><button class="theme" id="theme">🌙</button></section>
-<section class="card">
-<div><b id="dayTitle">День 1 из 14</b><span style="float:right" id="courseCount">0/14</span></div>
-<div class="progressline"><div class="bar" id="courseBar"></div></div>
+<body>
+<main class="app">
+<section class="hero">
+  <span class="tag">4 слова в день · 14 дней</span>
+  <h1>English with Tanya</h1>
+  <p>Одно действие за раз. Следующий день откроется только после всех правильных ответов.</p>
+  <button class="theme" id="themeBtn">🌙</button>
 </section>
-<section id="lesson"></section>
-</main>
-<script>
-const DAYS=[{"day": 1, "words": [["actually", "на самом деле"], ["probably", "вероятно"], ["especially", "особенно"], ["however", "однако"], ["timeline", "таймлайн"], ["footage", "исходный материал"], ["sequence", "последовательность кадров"], ["transition", "переход"]], "example": "I actually prefer this version.", "gpt": false}, {"day": 2, "words": [["instead", "вместо этого"], ["although", "хотя"], ["improve", "улучшать"], ["achieve", "достигать"], ["overlay", "наложение"], ["caption", "подпись"], ["subtitle", "субтитр"], ["voice-over", "закадровый голос"]], "example": "The footage needs a smoother transition.", "gpt": false}, {"day": 3, "words": [["suggest", "предлагать"], ["explain", "объяснять"], ["compare", "сравнивать"], ["realize", "осознавать"], ["frame", "кадр"], ["trim", "обрезать"], ["split", "разделить"], ["merge", "объединить"]], "example": "The deadline is quite tight.", "gpt": true}, {"day": 4, "words": [["manage", "справляться"], ["consider", "рассматривать"], ["confident", "уверенный"], ["comfortable", "комфортный"], ["crop", "кадрировать"], ["resize", "изменить размер"], ["zoom", "масштабировать"], ["stabilize", "стабилизировать"]], "example": "Could you clarify this revision?", "gpt": false}, {"day": 5, "words": [["opportunity", "возможность"], ["experience", "опыт"], ["available", "доступный"], ["possible", "возможный"], ["keyframe", "ключевой кадр"], ["masking", "маскирование"], ["motion graphics", "моушн-графика"], ["render", "рендерить"]], "example": "This approach is more effective.", "gpt": false}, {"day": 6, "words": [["challenge", "сложность"], ["effective", "эффективный"], ["appropriate", "подходящий"], ["specific", "конкретный"], ["export", "экспортировать"], ["bitrate", "битрейт"], ["frame rate", "частота кадров"], ["aspect ratio", "соотношение сторон"]], "example": "I feel more confident now.", "gpt": true}, {"day": 7, "words": [["recommend", "рекомендовать"], ["avoid", "избегать"], ["develop", "развивать"], ["independent", "самостоятельный"], ["color grading", "стилистическая цветокоррекция"], ["color correction", "техническая цветокоррекция"], ["exposure", "экспозиция"], ["saturation", "насыщенность"]], "example": "I need to review these words.", "gpt": false}, {"day": 8, "words": [["eventually", "в конце концов"], ["recently", "недавно"], ["meanwhile", "тем временем"], ["definitely", "определённо"], ["contrast", "контраст"], ["highlights", "светлые участки"], ["shadows", "тени"], ["white balance", "баланс белого"]], "example": "I would recommend another option.", "gpt": false}, {"day": 9, "words": [["perhaps", "возможно"], ["despite", "несмотря на"], ["unless", "если не"], ["reliable", "надёжный"], ["background music", "фоновая музыка"], ["sound effects", "звуковые эффекты"], ["audio levels", "уровни звука"], ["noise reduction", "шумоподавление"]], "example": "There is an issue with the export.", "gpt": true}, {"day": 10, "words": [["flexible", "гибкий"], ["reasonable", "разумный"], ["accurate", "точный"], ["notice", "замечать"], ["fade in", "плавное появление"], ["fade out", "плавное затухание"], ["mute", "отключить звук"], ["hook", "зацепка в начале"]], "example": "The hook should attract attention.", "gpt": false}, {"day": 11, "words": [["mention", "упоминать"], ["admit", "признавать"], ["expect", "ожидать"], ["require", "требовать"], ["retention", "удержание аудитории"], ["engagement", "вовлечённость"], ["thumbnail", "обложка"], ["algorithm", "алгоритм"]], "example": "The color grading looks more subtle.", "gpt": false}, {"day": 12, "words": [["involve", "включать в себя"], ["depend", "зависеть"], ["prefer", "предпочитать"], ["respond", "отвечать"], ["viral", "вирусный"], ["trending", "трендовый"], ["reach", "охват"], ["watch time", "время просмотра"]], "example": "Please confirm the final deadline.", "gpt": true}, {"day": 13, "words": [["continue", "продолжать"], ["decision", "решение"], ["result", "результат"], ["purpose", "цель"], ["revision", "правка"], ["feedback", "обратная связь"], ["deadline", "срок сдачи"], ["draft", "черновик"]], "example": "The ending creates a stronger emotion.", "gpt": false}, {"day": 14, "words": [["progress", "прогресс"], ["support", "поддерживать"], ["solution", "решение"], ["issue", "проблема"], ["final version", "финальная версия"], ["deliverables", "результаты работы"], ["requirements", "требования"], ["reference", "референс"]], "example": "My next goal is to speak more fluently.", "gpt": true}];
-let currentDay=parseInt(localStorage.getItem('tanya-v5-current-day')||'1');
-let wordIndex=0, stage='learn', answers={}, spellAnswers={};
-const lesson=document.getElementById('lesson');
-const allWords=DAYS.flatMap(d=>d.words);
 
-function dayData(){return DAYS[currentDay-1]}
-function setCourseProgress(){
- document.getElementById('dayTitle').textContent=`День ${currentDay} из 14`;
- let completed=currentDay-1;
- document.getElementById('courseCount').textContent=`${completed}/14`;
- document.getElementById('courseBar').style.width=(completed/14*100)+'%';
+<section class="card">
+  <div style="display:flex;justify-content:space-between;font-weight:900">
+    <span id="dayLabel">День 1 из 14</span>
+    <span id="courseLabel">0%</span>
+  </div>
+  <div class="progress"><div id="courseBar"></div></div>
+</section>
+
+<section id="screen"></section>
+</main>
+
+<script>
+const COURSE = [{"day": 1, "words": [["actually", "на самом деле"], ["however", "однако"], ["timeline", "таймлайн"], ["footage", "исходный материал"]], "gpt": false}, {"day": 2, "words": [["probably", "вероятно"], ["especially", "особенно"], ["sequence", "последовательность кадров"], ["transition", "переход"]], "gpt": false}, {"day": 3, "words": [["instead", "вместо этого"], ["although", "хотя"], ["overlay", "наложение"], ["caption", "подпись"]], "gpt": true}, {"day": 4, "words": [["improve", "улучшать"], ["achieve", "достигать"], ["subtitle", "субтитр"], ["voice-over", "закадровый голос"]], "gpt": false}, {"day": 5, "words": [["suggest", "предлагать"], ["explain", "объяснять"], ["frame", "кадр"], ["trim", "обрезать"]], "gpt": false}, {"day": 6, "words": [["compare", "сравнивать"], ["realize", "осознавать"], ["split", "разделить"], ["merge", "объединить"]], "gpt": true}, {"day": 7, "words": [["manage", "справляться"], ["consider", "рассматривать"], ["crop", "кадрировать"], ["resize", "изменить размер"]], "gpt": false}, {"day": 8, "words": [["confident", "уверенный"], ["comfortable", "комфортный"], ["zoom", "масштабировать"], ["stabilize", "стабилизировать"]], "gpt": false}, {"day": 9, "words": [["opportunity", "возможность"], ["experience", "опыт"], ["keyframe", "ключевой кадр"], ["masking", "маскирование"]], "gpt": true}, {"day": 10, "words": [["available", "доступный"], ["possible", "возможный"], ["motion graphics", "моушн-графика"], ["render", "рендерить"]], "gpt": false}, {"day": 11, "words": [["challenge", "сложность"], ["effective", "эффективный"], ["export", "экспортировать"], ["frame rate", "частота кадров"]], "gpt": false}, {"day": 12, "words": [["appropriate", "подходящий"], ["specific", "конкретный"], ["aspect ratio", "соотношение сторон"], ["color grading", "стилистическая цветокоррекция"]], "gpt": true}, {"day": 13, "words": [["recommend", "рекомендовать"], ["avoid", "избегать"], ["color correction", "техническая цветокоррекция"], ["exposure", "экспозиция"]], "gpt": false}, {"day": 14, "words": [["develop", "развивать"], ["independent", "самостоятельный"], ["saturation", "насыщенность"], ["contrast", "контраст"]], "gpt": true}];
+
+let currentDay = Number(localStorage.getItem('tanya-v6-current-day') || '1');
+let wordIndex = Number(localStorage.getItem('tanya-v6-word-index') || '0');
+let stage = localStorage.getItem('tanya-v6-stage') || 'learn';
+let chosenAnswer = null;
+let finalAnswers = {};
+
+const screen = document.getElementById('screen');
+
+function normalize(value) {
+  return String(value).toLowerCase().trim().replace(/[.!?,]/g,'').replace(/\s+/g,' ');
 }
-function normalize(s){return String(s).toLowerCase().trim().replace(/[.!?,]/g,'').replace(/\s+/g,' ')}
-function render(){
- setCourseProgress();
- if(currentDay>14){
-  lesson.innerHTML=`<section class="card success"><h2>Курс завершён 🎉</h2><p>Ты правильно прошла все 14 уроков.</p></section>`;return;
- }
- const d=dayData();
- if(stage==='learn'){
-  const w=d.words[wordIndex];
-  lesson.innerHTML=`<section class="card word-card"><div class="counter">Слово ${wordIndex+1} из 8</div><div class="word-en">${w[0]}</div><div class="word-ru">${w[1]}</div><button class="main" onclick="nextWord()">Понятно, дальше</button></section>`;
- } else if(stage==='choice'){
-  const qs=d.words.map((w,i)=>{
-   const others=allWords.filter(x=>x[0]!==w[0]).sort(()=>Math.random()-.5).slice(0,3).map(x=>x[1]);
-   const options=[w[1],...others].sort(()=>Math.random()-.5);
-   return {word:w[0],answer:w[1],options};
+
+function currentLesson() {
+  return COURSE[currentDay - 1];
+}
+
+function currentWord() {
+  return currentLesson().words[wordIndex];
+}
+
+function saveState() {
+  localStorage.setItem('tanya-v6-current-day', String(currentDay));
+  localStorage.setItem('tanya-v6-word-index', String(wordIndex));
+  localStorage.setItem('tanya-v6-stage', stage);
+}
+
+function updateHeader() {
+  const completed = Math.min(currentDay - 1, 14);
+  document.getElementById('dayLabel').textContent =
+    currentDay <= 14 ? `День ${currentDay} из 14` : 'Курс завершён';
+  document.getElementById('courseLabel').textContent =
+    Math.round(completed / 14 * 100) + '%';
+  document.getElementById('courseBar').style.width =
+    (completed / 14 * 100) + '%';
+}
+
+function shuffledOptions(correct) {
+  const all = COURSE.flatMap(day => day.words)
+    .filter(word => word[1] !== correct)
+    .sort(() => Math.random() - .5)
+    .slice(0, 3)
+    .map(word => word[1]);
+  return [correct, ...all].sort(() => Math.random() - .5);
+}
+
+function render() {
+  updateHeader();
+
+  if (currentDay > 14) {
+    screen.innerHTML = `
+      <section class="card success">
+        <h2>Курс завершён 🎉</h2>
+        <p>Ты прошла все 14 дней и правильно выполнила все обязательные задания.</p>
+      </section>`;
+    return;
+  }
+
+  const lesson = currentLesson();
+  const word = currentWord();
+
+  if (stage === 'learn') {
+    screen.innerHTML = `
+      <section class="card word-main">
+        <div class="word-number">Слово ${wordIndex + 1} из 4</div>
+        <div class="word-en">${word[0]}</div>
+        <div class="word-ru">${word[1]}</div>
+        <button class="primary" onclick="goToChoice()">Запомнила</button>
+      </section>`;
+  }
+
+  if (stage === 'choice') {
+    chosenAnswer = null;
+    const options = shuffledOptions(word[1]);
+    screen.innerHTML = `
+      <section class="card">
+        <div class="word-number">Слово ${wordIndex + 1} · шаг 2 из 4</div>
+        <h2>Выбери перевод</h2>
+        <p><b>${word[0]}</b></p>
+        <div id="options">
+          ${options.map(option => `
+            <button class="option" onclick='chooseOption(${JSON.stringify(option)})'>${option}</button>
+          `).join('')}
+        </div>
+        <button class="primary" onclick="checkChoice()">Проверить</button>
+        <div class="feedback" id="choiceFeedback"></div>
+      </section>`;
+  }
+
+  if (stage === 'spell') {
+    screen.innerHTML = `
+      <section class="card">
+        <div class="word-number">Слово ${wordIndex + 1} · шаг 3 из 4</div>
+        <h2>Напиши слово</h2>
+        <p>Как по-английски: <b>${word[1]}</b>?</p>
+        <input id="spellInput" type="text" autocomplete="off" autocapitalize="none">
+        <button class="primary" onclick="checkSpelling()">Проверить</button>
+        <div class="feedback" id="spellFeedback"></div>
+      </section>`;
+  }
+
+  if (stage === 'sentence') {
+    screen.innerHTML = `
+      <section class="card">
+        <div class="word-number">Слово ${wordIndex + 1} · шаг 4 из 4</div>
+        <h2>Составь предложение</h2>
+        <p>Напиши английское предложение со словом <b>${word[0]}</b>.</p>
+        <textarea id="sentenceInput" placeholder="Например: I use this word in my work."></textarea>
+        <button class="primary" onclick="checkSentence()">Проверить</button>
+        <div class="feedback" id="sentenceFeedback"></div>
+      </section>`;
+  }
+
+  if (stage === 'final') {
+    finalAnswers = {};
+    screen.innerHTML = `
+      <section class="card">
+        <div class="word-number">Итог дня</div>
+        <h2>Напиши все 4 слова</h2>
+        <p>Пока все четыре слова не будут написаны правильно, день не завершится.</p>
+        ${lesson.words.map((item, index) => `
+          <div style="margin-top:16px">
+            <b>${index + 1}. ${item[1]}</b>
+            <input id="final-${index}" type="text" autocomplete="off" autocapitalize="none">
+            <div class="feedback" id="final-feedback-${index}"></div>
+          </div>
+        `).join('')}
+        <button class="primary" onclick="checkFinal()">Проверить все слова</button>
+        <div class="feedback" id="finalSummary"></div>
+      </section>`;
+  }
+
+  if (stage === 'gpt') {
+    screen.innerHTML = `
+      <section class="card gpt">
+        <div class="word-number" style="color:white">Практика дня</div>
+        <h2>Поговори с GPT</h2>
+        <p>Начни разговор фразой:</p>
+        <p><b>«Давай практиковать английский. День ${currentDay}. Поговори со мной, а в конце назови слова, которых мне не хватало».</b></p>
+        <button class="primary" onclick="finishDay()">Практика завершена</button>
+      </section>`;
+  }
+}
+
+function goToChoice() {
+  stage = 'choice';
+  saveState();
+  render();
+}
+
+function chooseOption(option) {
+  chosenAnswer = option;
+  document.querySelectorAll('.option').forEach(button => {
+    button.classList.toggle('selected', button.textContent === option);
   });
-  window.choiceQuestions=qs;
-  lesson.innerHTML=`<section class="card"><h2>Шаг 2. Выбери перевод</h2><p class="muted">Все 8 ответов должны быть правильными.</p>${qs.map((q,i)=>`<div class="question" data-i="${i}"><b>${i+1}. Что значит “${q.word}”?</b><div class="options">${q.options.map(o=>`<button class="opt" onclick='selectChoice(${i},${JSON.stringify(o)})'>${o}</button>`).join('')}</div></div>`).join('')}<button class="main" onclick="checkChoices()">Проверить</button><div class="feedback" id="choiceFeedback"></div></section>`;
- } else if(stage==='spell'){
-  lesson.innerHTML=`<section class="card"><h2>Шаг 3. Напиши слова</h2><p class="muted">Напиши английское слово по переводу. Ошибочные поля нужно исправить.</p>${d.words.map((w,i)=>`<div class="question"><b>${i+1}. ${w[1]}</b><input type="text" id="spell${i}" value="${spellAnswers[i]||''}" placeholder="English word"><div class="feedback" id="spellFeedback${i}"></div></div>`).join('')}<button class="main" onclick="checkSpelling()">Проверить написание</button><div class="feedback" id="spellSummary"></div></section>`;
- } else if(stage==='sentence'){
-  lesson.innerHTML=`<section class="card"><h2>Шаг 4. Заполни пропуск</h2><p class="muted">Впиши пропущенное слово точно.</p><div class="question"><b>${d.example.replace(d.words[0][0],'_____')}</b><input type="text" id="sentenceInput" placeholder="Пропущенное слово"><div class="feedback" id="sentenceFeedback"></div></div><button class="main" onclick="checkSentence()">Проверить</button></section>`;
- } else if(stage==='gpt' && d.gpt){
-  lesson.innerHTML=`<section class="card gpt"><h2>Практика с GPT</h2><p>Поговори 5–10 минут. После разговора нажми «Практика завершена».</p><p><b>Фраза для начала:</b><br>Давай практиковать английский. День ${currentDay}. Не исправляй меня сразу, а в конце назови слова, которых мне не хватало.</p><button class="main" onclick="finishDay()">Практика завершена</button></section>`;
- } else {
-  finishDay();
- }
 }
-function nextWord(){
- if(wordIndex<7){wordIndex++;render()}else{stage='choice';answers={};render()}
+
+function checkChoice() {
+  const word = currentWord();
+  const feedback = document.getElementById('choiceFeedback');
+
+  if (chosenAnswer === word[1]) {
+    feedback.textContent = 'Правильно ✓';
+    feedback.style.color = 'var(--ok)';
+    document.querySelectorAll('.option').forEach(button => {
+      if (button.textContent === word[1]) button.classList.add('correct');
+    });
+    setTimeout(() => {
+      stage = 'spell';
+      saveState();
+      render();
+    }, 500);
+  } else {
+    feedback.textContent = 'Неправильно. Выбери другой вариант.';
+    feedback.style.color = 'var(--bad)';
+    document.querySelectorAll('.option').forEach(button => {
+      button.classList.remove('wrong');
+      if (button.textContent === chosenAnswer) button.classList.add('wrong');
+    });
+  }
 }
-function selectChoice(i,o){
- answers[i]=o;
- const q=document.querySelector(`.question[data-i="${i}"]`);
- q.querySelectorAll('.opt').forEach(b=>b.classList.toggle('selected',b.textContent===o));
+
+function checkSpelling() {
+  const word = currentWord();
+  const input = document.getElementById('spellInput');
+  const feedback = document.getElementById('spellFeedback');
+
+  if (normalize(input.value) === normalize(word[0])) {
+    feedback.textContent = 'Правильно ✓';
+    feedback.style.color = 'var(--ok)';
+    input.style.borderColor = 'var(--ok)';
+    setTimeout(() => {
+      stage = 'sentence';
+      saveState();
+      render();
+    }, 500);
+  } else {
+    feedback.textContent = 'Неправильно. Попробуй ещё раз.';
+    feedback.style.color = 'var(--bad)';
+    input.style.borderColor = 'var(--bad)';
+  }
 }
-function checkChoices(){
- let allCorrect=true;
- choiceQuestions.forEach((q,i)=>{
-  const chosen=answers[i], node=document.querySelector(`.question[data-i="${i}"]`);
-  node.querySelectorAll('.opt').forEach(b=>{b.classList.remove('correct','wrong');if(b.textContent===q.answer)b.classList.add('correct');if(chosen===b.textContent&&chosen!==q.answer)b.classList.add('wrong')});
-  if(chosen!==q.answer) allCorrect=false;
- });
- const f=document.getElementById('choiceFeedback');
- if(allCorrect){f.textContent='Все правильно ✓';f.style.color='var(--ok)';setTimeout(()=>{stage='spell';render()},600)}
- else{f.textContent='Есть ошибки. Исправь их — без этого дальше нельзя.';f.style.color='var(--bad)'}
+
+function checkSentence() {
+  const word = currentWord();
+  const input = document.getElementById('sentenceInput');
+  const feedback = document.getElementById('sentenceFeedback');
+  const text = normalize(input.value);
+  const containsWord = text.includes(normalize(word[0]));
+  const hasEnoughWords = text.split(' ').filter(Boolean).length >= 3;
+
+  if (containsWord && hasEnoughWords) {
+    feedback.textContent = 'Принято ✓';
+    feedback.style.color = 'var(--ok)';
+    setTimeout(() => {
+      if (wordIndex < 3) {
+        wordIndex += 1;
+        stage = 'learn';
+      } else {
+        wordIndex = 0;
+        stage = 'final';
+      }
+      saveState();
+      render();
+    }, 500);
+  } else {
+    feedback.textContent =
+      `Предложение должно содержать слово “${word[0]}” и хотя бы 3 слова.`;
+    feedback.style.color = 'var(--bad)';
+  }
 }
-function checkSpelling(){
- const d=dayData();let allCorrect=true;
- d.words.forEach((w,i)=>{
-  const input=document.getElementById('spell'+i);spellAnswers[i]=input.value;
-  const ok=normalize(input.value)===normalize(w[0]);
-  const f=document.getElementById('spellFeedback'+i);
-  f.textContent=ok?'Правильно ✓':'Неправильно. Попробуй ещё раз.';
-  f.style.color=ok?'var(--ok)':'var(--bad)';
-  input.style.borderColor=ok?'var(--ok)':'var(--bad)';
-  if(!ok) allCorrect=false;
- });
- const s=document.getElementById('spellSummary');
- if(allCorrect){s.textContent='Все слова написаны правильно ✓';s.style.color='var(--ok)';setTimeout(()=>{stage='sentence';render()},700)}
- else{s.textContent='Урок не завершён: исправь все слова.';s.style.color='var(--bad)'}
+
+function checkFinal() {
+  const lesson = currentLesson();
+  let allCorrect = true;
+
+  lesson.words.forEach((word, index) => {
+    const input = document.getElementById(`final-${index}`);
+    const feedback = document.getElementById(`final-feedback-${index}`);
+    const correct = normalize(input.value) === normalize(word[0]);
+
+    feedback.textContent = correct ? 'Правильно ✓' : 'Неправильно. Исправь.';
+    feedback.style.color = correct ? 'var(--ok)' : 'var(--bad)';
+    input.style.borderColor = correct ? 'var(--ok)' : 'var(--bad)';
+    if (!correct) allCorrect = false;
+  });
+
+  const summary = document.getElementById('finalSummary');
+
+  if (allCorrect) {
+    summary.textContent = 'Все четыре слова правильные ✓';
+    summary.style.color = 'var(--ok)';
+    setTimeout(() => {
+      stage = currentLesson().gpt ? 'gpt' : 'complete';
+      if (stage === 'complete') {
+        finishDay();
+      } else {
+        saveState();
+        render();
+      }
+    }, 700);
+  } else {
+    summary.textContent = 'День не завершён. Исправь все ошибки.';
+    summary.style.color = 'var(--bad)';
+  }
 }
-function checkSentence(){
- const d=dayData(), expected=d.words[0][0], value=document.getElementById('sentenceInput').value;
- const f=document.getElementById('sentenceFeedback');
- if(normalize(value)===normalize(expected)){
-  f.textContent='Правильно ✓';f.style.color='var(--ok)';
-  setTimeout(()=>{stage=d.gpt?'gpt':'finish';render()},600);
- } else {
-  f.textContent='Неправильно. Урок не завершён — попробуй ещё раз.';f.style.color='var(--bad)';
- }
+
+function finishDay() {
+  localStorage.setItem(`tanya-v6-day-${currentDay}-done`, '1');
+  currentDay += 1;
+  wordIndex = 0;
+  stage = 'learn';
+  saveState();
+  render();
 }
-function finishDay(){
- localStorage.setItem('tanya-v5-done-'+currentDay,'1');
- currentDay++;
- localStorage.setItem('tanya-v5-current-day',String(currentDay));
- wordIndex=0;stage='learn';answers={};spellAnswers={};render();
+
+const themeBtn = document.getElementById('themeBtn');
+const savedTheme = localStorage.getItem('tanya-theme') || 'light';
+document.documentElement.dataset.theme = savedTheme;
+themeBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+themeBtn.onclick = () => {
+  const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+  document.documentElement.dataset.theme = next;
+  localStorage.setItem('tanya-theme', next);
+  themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';
+};
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./service-worker.js');
 }
-const theme=document.getElementById('theme'),saved=localStorage.getItem('tanya-theme')||'light';
-document.documentElement.dataset.theme=saved;theme.textContent=saved==='dark'?'☀️':'🌙';
-theme.onclick=()=>{let t=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=t;localStorage.setItem('tanya-theme',t);theme.textContent=t==='dark'?'☀️':'🌙'};
-if('serviceWorker'in navigator)navigator.serviceWorker.register('./service-worker.js');
+
 render();
-</script></body></html>
+</script>
+</body>
+</html>
